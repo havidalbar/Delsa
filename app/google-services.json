@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "373443647966",
+    "firebase_url": "https://delsa-3310f.firebaseio.com",
+    "project_id": "delsa-3310f",
+    "storage_bucket": "delsa-3310f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373443647966:android:838c04074f405c3265254f",
+        "android_client_info": {
+          "package_name": "com.example.delsa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373443647966-tgimp80jaedh11rr63aok44sh1vqj8t7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.delsa",
+            "certificate_hash": "3092237caa4fee0eff71dda4ccd62369ad73810c"
+          }
+        },
+        {
+          "client_id": "373443647966-fqgkts4c1654rfvqj36ktdatql8515ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyButmlDZkUwJ32_mKTER46_hDjsevdNN4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373443647966-fqgkts4c1654rfvqj36ktdatql8515ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

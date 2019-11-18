@@ -1,8 +1,10 @@
 package com.example.delsa.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnLogin;
     private TextView tvGoregis;
     private FirebaseAuth auth;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,9 +125,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null){
-            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-            startActivity(intent);
-            finish();
+            String uid = currentUser.getUid();
+            DatabaseReference fotoIdRef;
+
+            fotoIdRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+            fotoIdRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String fotoIdentidas = dataSnapshot.child("fotoIdentitas").getValue().toString();
+                    if (fotoIdentidas.equals("")){
+                        showAlert();
+                    }
+                    else {
+                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
+
+    }
+
+    private void showAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Atur Foto identitas sekarang?")
+                .setTitle("Perhatian!!");
+        builder.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(LoginActivity.this, BuktiDataDiriActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Keluar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                onBackPressed();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

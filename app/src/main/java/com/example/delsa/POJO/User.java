@@ -1,13 +1,17 @@
 package com.example.delsa.POJO;
 
 public class User {
-    private String nama, noTelephone, kota, email;
+    private String nama, noTelephone, kota, email, fotoIdentitas, fotoProfil;
+    private boolean status;
 
-    public User(String nama, String noTelephone, String kota, String email) {
+    public User(String nama, String noTelephone, String kota, String email, String fotoIdentitas, String fotoProfil, boolean status) {
         this.nama = nama;
         this.noTelephone = noTelephone;
         this.kota = kota;
         this.email = email;
+        this.fotoIdentitas = fotoIdentitas;
+        this.fotoProfil = fotoProfil;
+        this.status = status;
     }
 
     public String getNama() {
@@ -40,5 +44,29 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFotoIdentitas() {
+        return fotoIdentitas;
+    }
+
+    public void setFotoIdentitas(String fotoIdentitas) {
+        this.fotoIdentitas = fotoIdentitas;
+    }
+
+    public String getFotoProfil() {
+        return fotoProfil;
+    }
+
+    public void setFotoProfil(String fotoProfil) {
+        this.fotoProfil = fotoProfil;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

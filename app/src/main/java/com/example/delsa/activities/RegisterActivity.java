@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     String userId = currentUser.getUid();
 
                     createUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                    User user = new User(namaUser, noUser, kotaUser, emailUser);
+                    User user = new User(namaUser, noUser, kotaUser, emailUser, "", "", false);
                     createUserRef.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -138,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Intent intent = new Intent(RegisterActivity.this, MenuActivity.class);
+                                    Intent intent = new Intent(RegisterActivity.this, BuktiDataDiriActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

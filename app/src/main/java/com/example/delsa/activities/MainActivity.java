@@ -1,4 +1,4 @@
-package com.example.delsa;
+package com.example.delsa.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,10 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.delsa.POJO.User;
-import com.example.delsa.activities.BuktiDataDiriActivity;
-import com.example.delsa.activities.MenuActivity;
-import com.example.delsa.activities.MenuAdminActivity;
-import com.example.delsa.activities.RegisterActivity;
+import com.example.delsa.R;
 import com.example.delsa.data.dataJawaTimur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,9 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BottomSheetBehavior bottomSheetBehaviorLogin, bottomSheetBehaviorRegis;
     private EditText etEmailLogin, etPasswordLogin;
     private Button btnLogin;
-    private TextView tvGoregis;
+    private TextView tvGoregis, tvGologin;
     private FirebaseAuth auth;
-    private AlertDialog alertDialog;
     private EditText etNamaRegis, etNoRegis, etKotaRegis, etEmailRegis, etPasswordRegis, etRePasswordRegis;
     private Button btnRegister;
     private DatabaseReference databaseReference, createUserRef;
@@ -73,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvGoregis = findViewById(R.id.tv_goRegis);
         tvGoregis.setOnClickListener(this);
 
+        tvGologin = findViewById(R.id.tv_goLogin);
+        tvGologin.setOnClickListener(this);
+
         auth = FirebaseAuth.getInstance();
 
         etNamaRegis = findViewById(R.id.et_namaRegister);
@@ -99,14 +98,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.btn_Login:
-                String email = etEmailLogin.getText().toString();
-                String password = etPasswordLogin.getText().toString();
+                email = etEmailLogin.getText().toString();
+                password = etPasswordLogin.getText().toString();
                 Log.d("Cek", email + password);
                 loginUser(email, password);
                 break;
             case R.id.tv_goRegis:
-                Intent regisIntent = new Intent(this, RegisterActivity.class);
-                startActivity(regisIntent);
+                bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.tv_goLogin:
+                bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.btn_register:
                 nama = etNamaRegis.getText().toString();

@@ -26,7 +26,7 @@ public class MenuAdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MenuAdminActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MenuAdminActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MenuAdminActivity.this, MainActivity.class);
                 startActivity(intent);
                 finishAffinity();
             }

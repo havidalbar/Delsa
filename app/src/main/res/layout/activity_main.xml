@@ -83,7 +83,8 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <include layout="@layout/bottom_login_layout"></include>
-    <include layout="@layout/bottom_register_layout"></include>
+    <include layout="@layout/bottom_login_layout"/>
+    <include layout="@layout/bottom_register_layout"/>
+    <include layout="@layout/bottom_register_information_layout"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

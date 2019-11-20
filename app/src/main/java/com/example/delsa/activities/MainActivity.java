@@ -34,14 +34,14 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button goLogin, goRegis;
-    private LinearLayout llLogin, llregis;
-    private BottomSheetBehavior bottomSheetBehaviorLogin, bottomSheetBehaviorRegis;
+    private LinearLayout llLogin, llregis, llregiscompletedata;
+    private BottomSheetBehavior bottomSheetBehaviorLogin, bottomSheetBehaviorRegis, bottomSheetBehaviorRegisCompleteData;
     private EditText etEmailLogin, etPasswordLogin;
     private Button btnLogin;
     private TextView tvGoregis, tvGologin;
     private FirebaseAuth auth;
     private EditText etNamaRegis, etNoRegis, etKotaRegis, etEmailRegis, etPasswordRegis, etRePasswordRegis;
-    private Button btnRegister;
+    private Button btnRegisternext, btnRegister;
     private DatabaseReference databaseReference, createUserRef;
     private String nama, no, kota, email, password, rePassword;
     private ProgressDialog PD;
@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         goRegis = findViewById(R.id.btn_goRegis);
         llLogin = findViewById(R.id.bottom_sheet_login);
         llregis = findViewById(R.id.bottom_sheet_regis);
+        llregiscompletedata = findViewById(R.id.bottom_sheet_regisdata);
         bottomSheetBehaviorLogin = BottomSheetBehavior.from(llLogin);
         bottomSheetBehaviorRegis = BottomSheetBehavior.from(llregis);
+        bottomSheetBehaviorRegisCompleteData = BottomSheetBehavior.from(llregiscompletedata);
         goLogin.setOnClickListener(this);
         goRegis.setOnClickListener(this);
 
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etEmailRegis = findViewById(R.id.et_emailRegister);
         etPasswordRegis = findViewById(R.id.et_passwordRegister);
         etRePasswordRegis = findViewById(R.id.et_ulangiPasswordRegister);
+
+        btnRegisternext = findViewById(R.id.btn_registernext);
+        btnRegisternext.setOnClickListener(this);
 
         btnRegister = findViewById(R.id.btn_register);
         btnRegister.setOnClickListener(this);
@@ -111,25 +116,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
+            case R.id.btn_registernext:
+                email = etEmailRegis.getText().toString();
+                password = etPasswordRegis.getText().toString();
+                rePassword = etRePasswordRegis.getText().toString();
+                if (!(email.equals("") && password.equals("") && rePassword.equals(""))) {
+                    if (password.equals(rePassword)) {
+                        bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        bottomSheetBehaviorRegisCompleteData.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    } else {
+                        Toast.makeText(this, "Password tidak sama", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Silahkan lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show();
+                }
+                break;
             case R.id.btn_register:
                 nama = etNamaRegis.getText().toString();
                 no = etNoRegis.getText().toString();
                 kota = etKotaRegis.getText().toString();
-                email = etEmailRegis.getText().toString();
-                password = etPasswordRegis.getText().toString();
-                rePassword = etRePasswordRegis.getText().toString();
 
-                if (password.equals(rePassword)) {
-                    if (checkKota(nama)) {
-                        adminExist(nama);
-                    } else {
-                        registerUser(nama, no, kota, email, password);
-                    }
+                if (checkKota(nama)) {
+                    adminExist(nama);
                 } else {
-                    Toast.makeText(this, "Password tidak sama", Toast.LENGTH_SHORT).show();
+                    registerUser(nama, no, kota, email, password);
                 }
-
-                break;
         }
     }
 
@@ -158,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 startActivity(intent);
                                 finish();
                             } else {
-                                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                                Intent intent = new Intent(MainActivity.this, MainUserActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -192,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
+
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null) {
@@ -207,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (fotoIdentidas.equals("")) {
                         showAlert();
                     } else {
-                        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                        Intent intent = new Intent(MainActivity.this, MainUserActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -315,6 +327,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                     PD.dismiss();
+                    Intent intent = new Intent(MainActivity.this,BuktiDataDiriActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Gagal buat akun", Toast.LENGTH_SHORT).show();
                 }

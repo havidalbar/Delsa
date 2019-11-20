@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet_regis"
+    android:id="@+id/bottom_sheet_regisdata"
     android:layout_width="match_parent"
-    android:layout_height="460dp"
+    android:layout_height="500dp"
     android:background="@drawable/btnwhite"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
@@ -13,94 +13,82 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Daftar"
+        android:text="Lengkapi data berikut"
         android:textColor="@android:color/black"
-        android:textSize="32dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Masukan email untuk daftar akun baru"
-        android:textColor="@android:color/black"
+        android:layout_marginVertical="16dp"
+        android:text="Nama Lengkap"
         android:textSize="16dp" />
 
-
     <EditText
-        android:id="@+id/et_emailRegister"
+        android:id="@+id/et_namaRegister"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginTop="24dp"
         android:background="@drawable/etbg"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="8dp"
+        android:inputType="textPersonName"
         android:drawableTint="@android:color/darker_gray"
-        android:hint="Email"
+        android:hint="Nama"
         android:paddingHorizontal="16dp" />
 
-    <EditText
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:text="Nomor Telepon"
+        android:textSize="16dp" />
 
-        android:id="@+id/et_passwordRegister"
+    <EditText
+        android:id="@+id/et_noTelpRegister"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/etbg"
-        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:inputType="phone"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"
         android:drawablePadding="8dp"
-        android:inputType="textPassword"
         android:drawableTint="@android:color/darker_gray"
-        android:hint="Password"
+        android:hint="No Telephone"
         android:paddingHorizontal="16dp" />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:text="Kota"
+        android:textSize="16dp" />
+
     <EditText
-        android:id="@+id/et_ulangiPasswordRegister"
+        android:id="@+id/et_kotaRegister"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:inputType="textPassword"
-        android:layout_marginTop="16dp"
         android:background="@drawable/etbg"
-        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawableLeft="@drawable/ic_location_city_black_24dp"
         android:drawablePadding="8dp"
         android:drawableTint="@android:color/darker_gray"
-        android:paddingHorizontal="16dp"
-        android:hint="Ulangi password" />
-
+        android:hint="Kota"
+        android:paddingHorizontal="16dp" />
 
     <Button
-        android:id="@+id/btn_registernext"
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/btnorange"
         android:text="Daftar"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="24dp" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sudah punya akun? "
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/tv_goLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Masuk"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-    </LinearLayout>
 </LinearLayout>

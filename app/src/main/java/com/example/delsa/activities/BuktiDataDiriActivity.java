@@ -3,7 +3,6 @@ package com.example.delsa.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -67,7 +66,6 @@ public class BuktiDataDiriActivity extends AppCompatActivity implements View.OnC
             case R.id.btn_ambilFoto:
                 dispatchTakePictureIntent();
                 break;
-
             case R.id.btn_uploadFoto:
                 storePhotoIdentity(dataFoto);
                 break;
@@ -106,7 +104,7 @@ public class BuktiDataDiriActivity extends AppCompatActivity implements View.OnC
                         public void onComplete(@NonNull Task task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(BuktiDataDiriActivity.this, "Foto identitas telah di upload", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(BuktiDataDiriActivity.this, MenuActivity.class);
+                                Intent intent = new Intent(BuktiDataDiriActivity.this, MainUserActivity.class);
                                 startActivity(intent);
                                 finish();
                             }

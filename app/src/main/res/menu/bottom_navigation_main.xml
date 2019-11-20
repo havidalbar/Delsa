@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homebutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/riwayatbutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_riwayat_black_24dp"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Riwayat"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/tambahbutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Tambah"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/notifikasibutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Notifikasi"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/profilebutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Profil"
+        app:showAsAction="ifRoom"/>
+</menu>

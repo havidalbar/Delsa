@@ -5,36 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="16dp"
     tools:context=".activities.BuktiDataDiriActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Silahkan upload foto\nKartu Identitas anda"
+        android:textSize="20dp" />
+
     <ImageView
+        android:id="@+id/img_fotoIdentitas"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:id="@+id/img_fotoIdentitas"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_image"/>
+        android:src="@drawable/ic_image" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_ambilFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ambil foto"
             android:layout_alignParentBottom="true"
-            android:id="@+id/btn_ambilFoto"/>
+            android:background="@drawable/btnorange"
+            android:text="Ambil foto"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
         <Button
+            android:id="@+id/btn_uploadFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Upload"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btngoogle"
             android:enabled="false"
-            android:id="@+id/btn_uploadFoto"/>
+            android:text="Upload"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

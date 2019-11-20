@@ -86,5 +86,7 @@
     <include layout="@layout/bottom_login_layout"/>
     <include layout="@layout/bottom_register_layout"/>
     <include layout="@layout/bottom_register_information_layout"/>
+    <include layout="@layout/bottom_lupa_password_layout"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

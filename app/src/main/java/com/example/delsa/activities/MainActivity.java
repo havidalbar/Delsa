@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String nama = dataSnapshot.child("nama").getValue().toString();
+                            Toast.makeText(MainActivity.this, nama, Toast.LENGTH_LONG).show();
 
                             if (checkAdmin(nama)) {
                                 Intent intent = new Intent(MainActivity.this, MenuAdminActivity.class);
@@ -182,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     });
                     PD.dismiss();
                 } else {
-
+                    Toast.makeText(MainActivity.this, "Login gagal", Toast.LENGTH_SHORT).show();
+                    PD.dismiss();
                 }
             }
         });

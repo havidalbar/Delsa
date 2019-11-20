@@ -9,6 +9,10 @@ import android.view.MenuItem;
 
 import com.example.delsa.R;
 import com.example.delsa.fragment.HomeFragment;
+import com.example.delsa.fragment.NotifikasiFragment;
+import com.example.delsa.fragment.ProfilFragment;
+import com.example.delsa.fragment.RiwayatFragment;
+import com.example.delsa.fragment.TambahFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainUserActivity extends AppCompatActivity {
@@ -24,6 +28,30 @@ public class MainUserActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.main_frame, homeFragment, "Home Fragment");
                     fragmentTransaction.commit();
                     setTitle("Home");
+                    return true;
+                case R.id.riwayatbutton:
+                    RiwayatFragment riwayatFragment = new RiwayatFragment();
+                    fragmentTransaction.replace(R.id.main_frame, riwayatFragment, "Riwayat Fragment");
+                    fragmentTransaction.commit();
+                    setTitle("Riwayat");
+                    return true;
+                case R.id.tambahbutton:
+                    TambahFragment tambahFragment = new TambahFragment();
+                    fragmentTransaction.replace(R.id.main_frame, tambahFragment, "Tambah Fragment");
+                    fragmentTransaction.commit();
+                    setTitle("Tambah");
+                    return true;
+                case R.id.notifikasibutton:
+                    NotifikasiFragment notifikasiFragment = new NotifikasiFragment();
+                    fragmentTransaction.replace(R.id.main_frame, notifikasiFragment, "Notifikasi Fragment");
+                    fragmentTransaction.commit();
+                    setTitle("Notifikasi");
+                    return true;
+                case R.id.profilebutton:
+                    ProfilFragment profilFragment = new ProfilFragment();
+                    fragmentTransaction.replace(R.id.main_frame, profilFragment, "Profil Fragment");
+                    fragmentTransaction.commit();
+                    setTitle("Profil");
                     return true;
             }
             return false;

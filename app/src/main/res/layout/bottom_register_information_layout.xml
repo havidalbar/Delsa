@@ -36,7 +36,7 @@
         android:drawablePadding="8dp"
         android:inputType="textPersonName"
         android:drawableTint="@android:color/darker_gray"
-        android:hint="Nama"
+        android:hint="Nama Lengkap"
         android:paddingHorizontal="16dp" />
 
     <TextView

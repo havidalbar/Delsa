@@ -42,14 +42,14 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button goLogin, goRegis;
-    private LinearLayout llLogin, llregis, llregiscompletedata;
-    private BottomSheetBehavior bottomSheetBehaviorLogin, bottomSheetBehaviorRegis, bottomSheetBehaviorRegisCompleteData;
+    private LinearLayout llLogin, llregis, llregiscompletedata,llLupaPassword;
+    private BottomSheetBehavior bottomSheetBehaviorLogin, bottomSheetBehaviorRegis, bottomSheetBehaviorRegisCompleteData, bottomSheetBehaviorLupaPassword;
     private EditText etEmailLogin, etPasswordLogin;
     private Button btnLogin, btnLoginGoogle;
-    private TextView tvGoregis, tvGologin;
+    private TextView tvGoregis, tvGologin, tvLupaPassword;
     private FirebaseAuth auth;
-    private EditText etNamaRegis, etNoRegis, etKotaRegis, etEmailRegis, etPasswordRegis, etRePasswordRegis;
-    private Button btnRegisternext, btnRegister;
+    private EditText etNamaRegis, etNoRegis, etKotaRegis, etEmailRegis, etPasswordRegis, etRePasswordRegis, etEmailLupaPassword;
+    private Button btnRegisternext, btnRegister, btnLupaPassword;
     private DatabaseReference databaseReference, createUserRef;
     private String nama, no, kota, email, password, rePassword;
     private ProgressDialog PD;
@@ -70,18 +70,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         goRegis = findViewById(R.id.btn_goRegis);
         llLogin = findViewById(R.id.bottom_sheet_login);
         llregis = findViewById(R.id.bottom_sheet_regis);
+        llLupaPassword = findViewById(R.id.bottom_sheet_lupa_password);
         llregiscompletedata = findViewById(R.id.bottom_sheet_regisdata);
         bottomSheetBehaviorLogin = BottomSheetBehavior.from(llLogin);
         bottomSheetBehaviorRegis = BottomSheetBehavior.from(llregis);
+        bottomSheetBehaviorLupaPassword = BottomSheetBehavior.from(llLupaPassword);
         bottomSheetBehaviorRegisCompleteData = BottomSheetBehavior.from(llregiscompletedata);
         goLogin.setOnClickListener(this);
         goRegis.setOnClickListener(this);
 
         etEmailLogin = findViewById(R.id.et_emailLogin);
         etPasswordLogin = findViewById(R.id.et_passwordLogin);
+        etEmailLupaPassword = findViewById(R.id.et_emailLupaPassword);
 
         btnLogin = findViewById(R.id.btn_Login);
         btnLogin.setOnClickListener(this);
+
+        btnLupaPassword = findViewById(R.id.btn_Lupa_Password);
+        btnLupaPassword.setOnClickListener(this);
 
         btnLoginGoogle = findViewById(R.id.btn_Google);
         btnLoginGoogle.setOnClickListener(this);
@@ -91,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvGologin = findViewById(R.id.tv_goLogin);
         tvGologin.setOnClickListener(this);
+
+        tvLupaPassword = findViewById(R.id.tvLupaPassword);
+        tvLupaPassword.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
 
@@ -138,7 +147,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     Toast.makeText(this, "Silahkan lengkapi data", Toast.LENGTH_SHORT).show();
                 }
+                break;
 
+            case R.id.btn_Lupa_Password:
+                email = etEmailLupaPassword.getText().toString();
+                if(!email.equals("")){
+                    lupaPassword(email);
+                }else{
+                    Toast.makeText(this, "Email tidak boleh dikosongi", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.tv_goRegis:
                 bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -147,6 +164,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_goLogin:
                 bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.tvLupaPassword:
+                bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                bottomSheetBehaviorLupaPassword.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.btn_registernext:
 
@@ -452,12 +473,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private void lupaPassword(final String email){
+        PD = new ProgressDialog(MainActivity.this);
+        PD.setMessage("Loading...");
+        PD.setCancelable(true);
+        PD.setCanceledOnTouchOutside(false);
+        PD.show();
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>(){
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    PD.dismiss();
+                    etEmailLupaPassword.setText("");
+                    bottomSheetBehaviorLupaPassword.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    Toast.makeText(MainActivity.this, "Email password reset telah terkirim, silahkan cek email anda", Toast.LENGTH_SHORT).show();
+                } else {
+                    PD.dismiss();
+                    Toast.makeText(MainActivity.this, "Maaf email yang anda masukan tidak terdaftar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         if (bottomSheetBehaviorLogin.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehaviorLogin.setState(BottomSheetBehavior.STATE_COLLAPSED);
         } else if (bottomSheetBehaviorRegis.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehaviorRegis.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }else if (bottomSheetBehaviorLupaPassword.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehaviorLupaPassword.setState(BottomSheetBehavior.STATE_COLLAPSED);
         } else {
             super.onBackPressed();
         }

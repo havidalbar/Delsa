@@ -3,4 +3,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="kategori_bencana">
+        <item>Pilih Kategori</item>
+        <item>Kebakaran</item>
+        <item>Longsor</item>
+        <item>Banjir</item>
+        <item>Gempa Bumi</item>
+        <item>Tsunami</item>
+        <item>Gunung Meletus</item>
+        <item>Puting Beliung</item>
+    </string-array>
 </resources>

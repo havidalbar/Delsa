@@ -5,10 +5,106 @@
     android:layout_height="match_parent"
     tools:context=".fragment.TambahFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tambah Bencana"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="32dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Masukan data bencana sebenar-benarnya"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/iv_fotoBencana"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_image" />
+
+            <EditText
+                android:id="@+id/et_judulBencana"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/etbg"
+                android:drawablePadding="8dp"
+                android:drawableTint="@android:color/darker_gray"
+                android:hint="Judul Bencana"
+                android:paddingHorizontal="16dp" />
+
+            <EditText
+                android:id="@+id/et_alamatBencana"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/etbg"
+                android:hint="Alamat"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp" />
+
+            <EditText
+                android:id="@+id/et_kotaBencana"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/etbg"
+                android:drawableTint="@android:color/darker_gray"
+                android:hint="Kota"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp" />
+
+            <Spinner
+                android:id="@+id/spn_kategoriBencana"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/etbg"
+                android:entries="@array/kategori_bencana"
+                android:paddingHorizontal="8dp" />
+
+            <EditText
+                android:id="@+id/et_deskripsiBencana"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/etbg"
+                android:drawableTint="@android:color/darker_gray"
+                android:gravity="start"
+                android:hint="Deskripsi"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp" />
+
+            <Button
+                android:id="@+id/btn_tambahBencana"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btnorange"
+                android:text="Tambah Bencana"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="24dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

@@ -371,6 +371,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
+        PD = new ProgressDialog(MainActivity.this);
+        PD.setMessage("Memeriksa data...");
+        PD.setCancelable(true);
+        PD.setCanceledOnTouchOutside(false);
+        PD.show();
+
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null) {
@@ -385,10 +391,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String fotoIdentidas = dataSnapshot.child("fotoIdentitas").getValue().toString();
                     if (fotoIdentidas.equals("")) {
                         showAlert();
+                        PD.dismiss();
                     } else {
+                        PD.dismiss();
                         Intent intent = new Intent(MainActivity.this, MainUserActivity.class);
                         startActivity(intent);
                         finish();
+
                     }
                 }
 
@@ -397,8 +406,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
             });
+        } else {
+            PD.dismiss();
         }
-
     }
 
     private void showAlert() {

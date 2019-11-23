@@ -1,6 +1,7 @@
 package com.example.delsa.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.delsa.DetailBencanaActivity;
 import com.example.delsa.R;
 
 
@@ -20,7 +22,7 @@ import com.example.delsa.R;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private Button btn_kebakaran, btn_longsor, btn_banjir, btn_gempa, btn_others;
+    private Button btn_kebakaran, btn_longsor, btn_banjir, btn_gempa, btn_others, btn_lihatsemuabencana;
     private RecyclerView rv_bencanaterdekat, rv_caripahalayuk;
     private TextView tv_lokasi, tv_searchbencana;
 
@@ -41,11 +43,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         btn_banjir = view.findViewById(R.id.btn_banjir);
         btn_gempa = view.findViewById(R.id.btn_gempa);
         btn_others = view.findViewById(R.id.btn_others);
+        btn_lihatsemuabencana = view.findViewById(R.id.btn_lihatsemuabencanaterdekat);
         btn_kebakaran.setOnClickListener(this);
         btn_longsor.setOnClickListener(this);
         btn_banjir.setOnClickListener(this);
         btn_gempa.setOnClickListener(this);
         btn_others.setOnClickListener(this);
+        btn_lihatsemuabencana.setOnClickListener(this);
 
         rv_bencanaterdekat = view.findViewById(R.id.rv_bencanaterdekat);
         rv_caripahalayuk = view.findViewById(R.id.rv_caripahalayuk);
@@ -71,6 +75,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_searchbencana:
                 break;
+            case R.id.btn_lihatsemuabencanaterdekat:
+                Intent intent = new Intent(getActivity(), DetailBencanaActivity.class);
+                startActivity(intent);
         }
     }
 }

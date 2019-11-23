@@ -31,7 +31,7 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
 
     private Button btnTambahBencana;
     private ImageView ivFotoBencana;
-    private EditText etJudulBencana, etAlamatBencana, etKotaBencana, etDeskripsiBencana;
+    private EditText etJudulBencana, etAlamatBencana, etDeskripsiBencana;
     private Spinner spnKategoriBencana;
     private Dialog dialog;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -51,7 +51,6 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         ivFotoBencana = view.findViewById(R.id.iv_fotoBencana);
         etJudulBencana = view.findViewById(R.id.et_judulBencana);
         etAlamatBencana = view.findViewById(R.id.et_alamatBencana);
-        etKotaBencana = view.findViewById(R.id.et_kotaBencana);
         etDeskripsiBencana = view.findViewById(R.id.et_deskripsiBencana);
         spnKategoriBencana = view.findViewById(R.id.spn_kategoriBencana);
         btnTambahBencana.setOnClickListener(this);
@@ -81,15 +80,13 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     private void tambahBencana() {
         String judulBencana = etJudulBencana.getText().toString();
         String alamatBencana = etAlamatBencana.getText().toString();
-        String kotaBencana = etKotaBencana.getText().toString();
         String deskripsiBencana = etDeskripsiBencana.getText().toString();
         String kategoriBencana = spnKategoriBencana.getSelectedItem().toString();
-        if (judulBencana.isEmpty() && alamatBencana.isEmpty() &&
-        kotaBencana.isEmpty() && deskripsiBencana.isEmpty() &&
+        if (judulBencana.isEmpty() && alamatBencana.isEmpty()  && deskripsiBencana.isEmpty() &&
                 spnKategoriBencana.getSelectedItemPosition() == 0){
             Toast.makeText(getContext(), "Lengkapi data diatas", Toast.LENGTH_SHORT).show();
         } else {
-            tambahBencanaKeDatabase(judulBencana,alamatBencana,kotaBencana,deskripsiBencana,kategoriBencana);
+            tambahBencanaKeDatabase(judulBencana,alamatBencana,deskripsiBencana,kategoriBencana);
         }
     }
 
@@ -126,7 +123,7 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String kotaBencana, String deskripsiBencana, String kategoriBencana){
+    private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana){
 
     }
 

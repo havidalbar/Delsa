@@ -39,6 +39,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button goLogin, goRegis;
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String nama = dataSnapshot.child("nama").getValue().toString();
+                            String nama = Objects.requireNonNull(dataSnapshot.child("nama").getValue()).toString();
                             Toast.makeText(MainActivity.this, nama, Toast.LENGTH_LONG).show();
 
                             if (checkAdmin(nama)) {

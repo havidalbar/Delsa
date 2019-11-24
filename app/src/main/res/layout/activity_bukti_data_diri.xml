@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="Silahkan upload foto\nKartu Identitas anda"
-        android:textSize="20dp" />
+        android:text="@string/silahkan_upload_foto_nkartu_identitas_anda"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/img_fotoIdentitas"
@@ -34,25 +34,23 @@
             android:id="@+id/btn_ambilFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="@drawable/btnorange"
-            android:text="Ambil foto"
+            android:text="@string/ambil_foto"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_uploadFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginTop="16dp"
             android:background="@drawable/btngoogle"
             android:enabled="false"
-            android:text="Upload"
+            android:text="@string/upload"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".KategoriDonasiActivity">
+    tools:context=".activities.KategoriDonasiActivity">
 
     <include
         android:id="@+id/toolbar_donasi"
@@ -42,14 +42,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Donasi Pakaian"
+                    android:text="@string/donasi_pakaian"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bantu para korban dengan mendonasikan pakaian baru/bekas."
+                    android:text="@string/bantu_para_korban_dengan_mendonasikan_pakaian_baru_bekas"
                     android:textColor="@android:color/black" />
 
             </LinearLayout>
@@ -80,14 +80,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Donasi Uang"
+                    android:text="@string/donasi_uang"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bantu para korban dengan mendonasikan pakaian baru/bekas."
+                    android:text="@string/bantu_para_korban_dengan_mendonasikan_pakaian_baru_bekas"
                     android:textColor="@android:color/black" />
 
             </LinearLayout>

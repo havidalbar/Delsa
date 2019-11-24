@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="450dp"
+    android:layout_height="400dp"
     android:background="@drawable/btnwhite"
     android:orientation="vertical">
 
@@ -12,13 +12,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="370dp"
+            android:gravity="center"
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:text="Perhatian"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
@@ -27,21 +28,21 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginVertical="8dp"
                 android:text="Harap pengguna dapat membaca dan memahami informasi berikut"
                 android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginVertical="8dp"
                 android:text="Delsa tidak memfasilitasi galang dana yang bersifat fiktif, main-main mengandung hoax, politik praktis, membayar hutang pinjaman dan kegiatan-kegiatan melanggar hukum."
                 android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginVertical="8dp"
                 android:text="Delsa memprioritaskan galang dana yang diinisiasi/didukung/ditunjukkan kepada Yayasan/Lembaga resmi dan penerima donasi dapat dibuktikan dengan transparan."
                 android:textSize="16sp" />
@@ -50,7 +51,7 @@
                 android:layout_marginTop="16dp"
                 android:id="@+id/btn_sayamengerti"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:background="@drawable/btnorange"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Saya Mengerti"

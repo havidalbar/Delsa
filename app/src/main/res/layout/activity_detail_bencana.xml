@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailBencanaActivity">
+    tools:context=".activities.DetailBencanaActivity">
 
     <Button
         android:id="@+id/btn_donasiSekarang"
@@ -14,7 +14,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/btnorange"
-        android:text="Donasi Sekarang"
+        android:text="@string/donasi_sekarang"
         android:textAllCaps="false"
         android:textColor="@android:color/white"/>
 

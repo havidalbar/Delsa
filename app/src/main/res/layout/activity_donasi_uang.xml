@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DonasiUangActivity">
+    tools:context=".activities.DonasiUangActivity">
 
     <include
         android:id="@+id/toolbar_donasi_uang"
@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             android:paddingHorizontal="16dp">
@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Masukan Nominal"
+                android:text="@string/masukan_nominal"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rp"
+                    android:text="@string/rp"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -49,7 +49,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="#fbfbfb"
-                    android:hint="0"
+                    android:hint="@string/nominal_hint"
                     android:inputType="number"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Metode Pembayaran"
+                android:text="@string/metode_pembayaran"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -125,11 +125,11 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text="Transfer Bank"
+                            android:text="@string/transfer_bank"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
@@ -164,11 +164,11 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text="Kartu Kredit"
+                            android:text="@string/kartu_kredit"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
@@ -191,11 +191,11 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text="GO-PAY"
+                            android:text="@string/go_pay"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
@@ -218,11 +218,11 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text="Jenius Pay"
+                            android:text="@string/jenius_pay"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
@@ -246,7 +246,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Nama Donatur"
+                android:text="@string/nama_donatur"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -256,7 +256,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="emaildonatur@gmail.com"
+                android:text="@string/email_donatur"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -266,10 +266,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sembunyikan Nama (sebagai Anonim)"
+                    android:text="@string/sembunyikan_nama_sebagai_anonim"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -287,10 +287,8 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/etbg"
-                android:drawableTint="@android:color/darker_gray"
                 android:gravity="start"
-                android:hint="Tulis pesan (opsional)..."
-                android:inputType="textPassword"
+                android:hint="@string/tulis_pesan_opsional"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="8dp" />
 
@@ -301,7 +299,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/btnorange"
-                android:text="Donasikan"
+                android:text="@string/donasikan"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"

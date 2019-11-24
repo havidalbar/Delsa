@@ -1,4 +1,4 @@
-package com.example.delsa;
+package com.example.delsa.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.example.delsa.R;
 
 public class DonasiUangActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
@@ -132,7 +135,22 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_donasikan:
+                String metode ="";
+                if(radio_transferbank.isChecked()){
+                    metode = "Transfer Bank";
+                } else if (radio_kartukredit.isChecked()){
+                    metode = "Kartu Kredit";
+                } else if (radio_gopay.isChecked()){
+                    metode = "GO-PAY";
+                } else if (radio_jeniuspay.isChecked()){
+                    metode = "Jenius Pay";
+                } else{
+                    Toast.makeText(this, "Silahkan Pilih Metode Pembayaran", Toast.LENGTH_SHORT).show();
+                }
 
+                if(!metode.equals("")) {
+                    Toast.makeText(this, et_nominaldonasi.getText().toString() + ',' + et_pesandonasi.getText().toString() + ',' + sw_anonim.isChecked() + ',' + metode, Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

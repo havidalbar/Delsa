@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DonasiPakaianActivity">
+    tools:context=".activities.DonasiPakaianActivity">
 
     <include
         android:id="@+id/toolbar_donasi_pakaian"
         layout="@layout/toolbar" />
-
 
 </LinearLayout>

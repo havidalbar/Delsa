@@ -1,4 +1,4 @@
-package com.example.delsa;
+package com.example.delsa.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.delsa.R;
 
 public class DetailBencanaActivity extends AppCompatActivity implements View.OnClickListener {
 

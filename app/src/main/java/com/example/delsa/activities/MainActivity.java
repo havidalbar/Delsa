@@ -547,9 +547,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         PD.dismiss();
-//        Intent intent = new Intent(MainActivity.this,BuktiDataDiriActivity.class);
-//        startActivity(intent);
-//        finish();
     }
 
 

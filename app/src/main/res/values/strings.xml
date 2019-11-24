@@ -3,6 +3,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="silahkan_upload_foto_nkartu_identitas_anda">Silahkan upload foto Kartu Identitas anda</string>
+    <string name="ambil_foto">Ambil foto</string>
+    <string name="upload">Upload</string>
+    <string name="donasi_sekarang">Donasi Sekarang</string>
+    <string name="masukan_nominal">Masukan Nominal</string>
+    <string name="rp">Rp</string>
+    <string name="nominal_hint">0</string>
+    <string name="metode_pembayaran">Metode Pembayaran</string>
+    <string name="transfer_bank">Transfer Bank</string>
+    <string name="kartu_kredit">Kartu Kredit</string>
+    <string name="go_pay">GO-PAY</string>
+    <string name="jenius_pay">Jenius Pay</string>
+    <string name="nama_donatur">Nama Donatur</string>
+    <string name="email_donatur">emaildonatur@gmail.com</string>
+    <string name="sembunyikan_nama_sebagai_anonim">Sembunyikan Nama (sebagai Anonim)</string>
+    <string name="tulis_pesan_opsional">Tulis pesan (opsional)...</string>
+    <string name="donasikan">Donasikan</string>
+    <string name="donasi_pakaian">Donasi Pakaian</string>
+    <string name="bantu_para_korban_dengan_mendonasikan_pakaian_baru_bekas">Bantu para korban dengan mendonasikan pakaian baru/bekas.</string>
+    <string name="donasi_uang">Donasi Uang</string>
 
     <string-array name="kategori_bencana">
         <item>Pilih Kategori</item>

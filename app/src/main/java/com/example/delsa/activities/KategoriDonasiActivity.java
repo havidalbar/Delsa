@@ -1,4 +1,4 @@
-package com.example.delsa;
+package com.example.delsa.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.example.delsa.R;
 
 public class KategoriDonasiActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,11 +36,11 @@ public class KategoriDonasiActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.ll_donasipakaian:
-                Intent intent = new Intent(KategoriDonasiActivity.this,DonasiPakaianActivity.class);
+                Intent intent = new Intent(KategoriDonasiActivity.this, DonasiPakaianActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_donasiuang:
-                Intent intentUang = new Intent(KategoriDonasiActivity.this,DonasiUangActivity.class);
+                Intent intentUang = new Intent(KategoriDonasiActivity.this, DonasiUangActivity.class);
                 startActivity(intentUang);
                 break;
         }

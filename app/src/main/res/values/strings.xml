@@ -23,6 +23,11 @@
     <string name="donasi_pakaian">Donasi Pakaian</string>
     <string name="bantu_para_korban_dengan_mendonasikan_pakaian_baru_bekas">Bantu para korban dengan mendonasikan pakaian baru/bekas.</string>
     <string name="donasi_uang">Donasi Uang</string>
+    <string name="link">kamimampu.com</string>
+    <string name="waktu">15 hari lagi</string>
+    <string name="deskripsi">Ayo bantu saudara kita yang sedang tertimpa musibah.</string>
+    <string name="judul">Bantu Saudara Kita Terkena Bencana Longsor Bandang</string>
+    <string name="nama_kategori">Kebakaran</string>
 
     <string-array name="kategori_bencana">
         <item>Pilih Kategori</item>

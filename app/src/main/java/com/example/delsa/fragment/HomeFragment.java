@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.delsa.activities.DetailBencanaActivity;
 import com.example.delsa.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 
 /**
@@ -25,6 +27,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button btn_kebakaran, btn_longsor, btn_banjir, btn_gempa, btn_others, btn_lihatsemuabencana;
     private RecyclerView rv_bencanaterdekat, rv_caripahalayuk;
     private TextView tv_lokasi, tv_searchbencana;
+    private BottomSheetBehavior bottomSheetBehaviorKategori;
+    private LinearLayout llkategori;
 
 
     public HomeFragment() {
@@ -57,6 +61,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tv_lokasi = view.findViewById(R.id.tv_lokasi);
         tv_searchbencana = view.findViewById(R.id.tv_searchbencana);
         tv_searchbencana.setOnClickListener(this);
+
+        llkategori = view.findViewById(R.id.bottom_sheet_kategori);
+        bottomSheetBehaviorKategori = BottomSheetBehavior.from(llkategori);
+
         return view;
     }
 
@@ -72,6 +80,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_gempa:
                 break;
             case R.id.btn_others:
+                bottomSheetBehaviorKategori.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.tv_searchbencana:
                 break;

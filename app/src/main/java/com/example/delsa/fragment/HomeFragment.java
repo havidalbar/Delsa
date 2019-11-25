@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.delsa.activities.DetailBencanaActivity;
 import com.example.delsa.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 
 /**
@@ -27,8 +29,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button btn_kebakaran, btn_longsor, btn_banjir, btn_gempa, btn_others, btn_lihatsemuabencana;
     private RecyclerView rv_bencanaterdekat, rv_caripahalayuk;
     private TextView tv_lokasi, tv_searchbencana;
-    private BottomSheetBehavior bottomSheetBehaviorKategori;
     private LinearLayout llkategori;
+    private ImageView iv_close;
+    private SlidingUpPanelLayout slideup;
 
 
     public HomeFragment() {
@@ -55,6 +58,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         btn_others.setOnClickListener(this);
         btn_lihatsemuabencana.setOnClickListener(this);
 
+        iv_close = view.findViewById(R.id.btn_close);
+        iv_close.setOnClickListener(this);
+
         rv_bencanaterdekat = view.findViewById(R.id.rv_bencanaterdekat);
         rv_caripahalayuk = view.findViewById(R.id.rv_caripahalayuk);
 
@@ -63,7 +69,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tv_searchbencana.setOnClickListener(this);
 
         llkategori = view.findViewById(R.id.bottom_sheet_kategori);
-        bottomSheetBehaviorKategori = BottomSheetBehavior.from(llkategori);
 
         return view;
     }
@@ -80,13 +85,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_gempa:
                 break;
             case R.id.btn_others:
-                bottomSheetBehaviorKategori.setState(BottomSheetBehavior.STATE_EXPANDED);
+                llkategori.setVisibility(View.VISIBLE);
                 break;
             case R.id.tv_searchbencana:
                 break;
             case R.id.btn_lihatsemuabencanaterdekat:
                 Intent intent = new Intent(getActivity(), DetailBencanaActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_close:
+                llkategori.setVisibility(View.INVISIBLE);
+                break;
         }
+    }
+
+    @Override
+    public void onPause() {
+        if(llkategori.getVisibility() == View.VISIBLE) {
+            llkategori.setVisibility(View.INVISIBLE);
+        }
+        super.onPause();
     }
 }

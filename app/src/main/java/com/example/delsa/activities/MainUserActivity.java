@@ -72,4 +72,5 @@ public class MainUserActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         setTitle("Home");
     }
+
 }

@@ -27,6 +27,7 @@ public class SlideScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SlideScreenActivity.this, MainActivity.class);
                 startActivity(intent);
+                finishAffinity();
             }
         });
 

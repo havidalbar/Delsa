@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
+        android:foreground="?attr/selectableItemBackground"
         android:paddingHorizontal="16dp">
 
         <LinearLayout

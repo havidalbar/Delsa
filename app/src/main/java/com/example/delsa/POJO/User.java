@@ -4,6 +4,9 @@ public class User {
     private String nama, noTelephone, kota, email, fotoIdentitas, fotoProfil;
     private boolean status;
 
+    public User() {
+    }
+
     public User(String nama, String noTelephone, String kota, String email, String fotoIdentitas, String fotoProfil, boolean status) {
         this.nama = nama;
         this.noTelephone = noTelephone;

@@ -4,8 +4,10 @@ package com.example.delsa.fragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -18,9 +20,21 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -36,6 +50,11 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     private Dialog dialog;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private byte[] dataFoto;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth auth;
+    private StorageReference photoDataDiriRef;
+    private DatabaseReference accountReference;
+    private String judulBencana, alamatBencana, deskripsiBencana, kategoriBencana;
 
     public TambahFragment() {
         // Required empty public constructor
@@ -55,6 +74,10 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         spnKategoriBencana = view.findViewById(R.id.spn_kategoriBencana);
         btnTambahBencana.setOnClickListener(this);
         ivFotoBencana.setOnClickListener(this);
+
+        auth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        accountReference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getUid());
         return view;
     }
 
@@ -78,15 +101,15 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     }
 
     private void tambahBencana() {
-        String judulBencana = etJudulBencana.getText().toString();
-        String alamatBencana = etAlamatBencana.getText().toString();
-        String deskripsiBencana = etDeskripsiBencana.getText().toString();
-        String kategoriBencana = spnKategoriBencana.getSelectedItem().toString();
-        if (judulBencana.isEmpty() && alamatBencana.isEmpty()  && deskripsiBencana.isEmpty() &&
-                spnKategoriBencana.getSelectedItemPosition() == 0){
+        judulBencana = etJudulBencana.getText().toString();
+        alamatBencana = etAlamatBencana.getText().toString();
+        deskripsiBencana = etDeskripsiBencana.getText().toString();
+        kategoriBencana = spnKategoriBencana.getSelectedItem().toString();
+        if (judulBencana.isEmpty() && alamatBencana.isEmpty() && deskripsiBencana.isEmpty() &&
+                spnKategoriBencana.getSelectedItemPosition() == 0) {
             Toast.makeText(getContext(), "Lengkapi data diatas", Toast.LENGTH_SHORT).show();
         } else {
-            tambahBencanaKeDatabase(judulBencana,alamatBencana,deskripsiBencana,kategoriBencana);
+            storePhotoIdentity(dataFoto);
         }
     }
 
@@ -123,10 +146,46 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana){
-
+    private String getKey(){
+        String key = FirebaseDatabase.getInstance().getReference().child("Bencana").push().getKey();
+        return key;
     }
 
+    private void storePhotoIdentity(byte[] dataFoto) {
+        String uid = auth.getUid();
+
+        photoDataDiriRef = FirebaseStorage.getInstance().getReference().child("images").child("photo_bencana").child(getKey() + ".jpg");
+        UploadTask uploadTask = photoDataDiriRef.putBytes(dataFoto);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return photoDataDiriRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    String url_photo = downloadUri.toString();
+
+                    tambahBencanaKeDatabase(judulBencana, alamatBencana, deskripsiBencana, kategoriBencana, url_photo);
+
+                }
+            }
+        });
+    }
+
+    private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana, String fotobencana) {
+        DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(getKey());
+        Bencana bencana = new Bencana(kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana);
+        myRef.setValue(bencana);
+    }
 
     @Override
     public void onStart() {

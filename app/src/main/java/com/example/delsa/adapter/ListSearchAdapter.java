@@ -28,7 +28,7 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Li
     public class ListViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgPhoto;
-        TextView tv
+        TextView tv_judul;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);

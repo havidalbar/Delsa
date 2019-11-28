@@ -57,7 +57,7 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout ll_settings;
     private Button btn_settings;
-    private TextView tv_namaProfil, tv_emailProfil, tv_nomorProfil, tv_logout;
+    private TextView tv_namaProfil, tv_emailProfil, tv_nomorProfil, tv_logout, tv_editprofil;
     private CircleImageView civ_photoProfil;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private byte[] dataFoto;
@@ -83,6 +83,7 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
         tv_emailProfil = view.findViewById(R.id.tv_emailprofil);
         tv_nomorProfil = view.findViewById(R.id.tv_nomorprofil);
         tv_logout = view.findViewById(R.id.tv_LogOut);
+        tv_editprofil = view.findViewById(R.id.tv_editProfil);
         civ_photoProfil = view.findViewById(R.id.civ_profilimage);
         tv_logout.setOnClickListener(this);
         btn_settings.setOnClickListener(this);

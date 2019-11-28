@@ -40,6 +40,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -72,6 +73,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
+                    android:id="@+id/tv_nominal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -94,6 +96,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
+                    android:id="@+id/tv_kodeunik"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -117,6 +120,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_totalharga"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -173,6 +177,7 @@
                         android:src="@drawable/logo_bri" />
 
                     <TextView
+                        android:id="@+id/tv_rekeningbri"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -184,6 +189,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/btn_salinbri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/Transparent"
@@ -210,6 +216,7 @@
                         android:src="@drawable/logo_mandiri" />
 
                     <TextView
+                        android:id="@+id/tv_rekeningmandiri"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -221,6 +228,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/btn_salinmandiri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/Transparent"
@@ -247,6 +255,7 @@
                         android:src="@drawable/logo_bni" />
 
                     <TextView
+                        android:id="@+id/tv_rekeningbni"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -258,6 +267,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/btn_salinbni"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/Transparent"
@@ -271,13 +281,14 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_peringatanpembayaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/btnorangetransparent"
                 android:padding="16dp"
                 android:textColor="@android:color/black"
-                android:text="Lakukan pembayaran sebelum 25 November 2019 17.00 WIB sebelum donasi dibatalkan oleh sistem"/>
+                android:text="Lakukan pembayaran sebelum 17.00 WIB sebelum donasi dibatalkan oleh sistem"/>
 
             <Button
                 android:id="@+id/btn_selesai"

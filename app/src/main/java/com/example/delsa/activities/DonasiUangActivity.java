@@ -3,6 +3,7 @@ package com.example.delsa.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -15,7 +16,15 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.delsa.POJO.Bencana;
+import com.example.delsa.POJO.Donasi;
 import com.example.delsa.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DonasiUangActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
@@ -26,17 +35,28 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
     private Button btn_donasikan;
     private Switch sw_anonim;
     private Bencana bencana;
+    private int random;
+    private Donasi donasi;
+    private String key;
+    private ProgressDialog PD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donasi_uang);
 
+        bencana = getIntent().getParcelableExtra("bencana");
+
+        random = (int) (Math.random() * (999 - 0));
+
         toolbar = findViewById(R.id.toolbar_donasi_uang);
         toolbar.setTitle("Donasi Uang");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        et_nominaldonasi = findViewById(R.id.et_nominaldonasi);
+        et_pesandonasi = findViewById(R.id.et_pesandonasi);
 
         radio_transferbank = findViewById(R.id.radio_transferbank);
         radio_kartukredit = findViewById(R.id.radio_kartukredit);
@@ -151,12 +171,44 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
                 }
 
                 if(!metode.equals("")) {
-                    Toast.makeText(this, et_nominaldonasi.getText().toString() + ',' + et_pesandonasi.getText().toString() + ',' + sw_anonim.isChecked() + ',' + metode, Toast.LENGTH_SHORT).show();
+                    PD = new ProgressDialog(this);
+                    PD.setMessage("Loading...");
+                    PD.setCancelable(true);
+                    PD.setCanceledOnTouchOutside(false);
+                    PD.show();
+                    donasiBencanaKeDatabase(bencana,et_nominaldonasi.getText().toString(),et_pesandonasi.getText().toString(),metode,sw_anonim.isChecked());
                     Intent intent = new Intent(DonasiUangActivity.this,PembayaranActivity.class);
+                    intent.putExtra("donasi",donasi);
                     startActivity(intent);
                     finish();
                 }
                 break;
         }
+    }
+
+    private void donasiBencanaKeDatabase(Bencana bencana, String nominaldonasi, String pesan, String metode, boolean anonim) {
+
+        int nominal = Integer.parseInt(nominaldonasi);
+        int total = nominal + random;
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        key = FirebaseDatabase.getInstance().getReference().child("Donasi").child(bencana.getIdbencana()).push().getKey();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi").child(bencana.getIdbencana()).child(key);
+
+        donasi = new Donasi(key,auth.getUid(),bencana.getIdbencana(),String.valueOf(nominal),String.valueOf(random),String.valueOf(total),metode,pesan,getTomorrowDate(),anonim,false);
+        myRef.setValue(donasi);
+        PD.dismiss();
+    }
+
+    private String getTomorrowDate(){
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        String formattedDate = df.format(tomorrow);
+        return formattedDate;
     }
 }

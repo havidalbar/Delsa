@@ -28,6 +28,8 @@
     <string name="deskripsi">Ayo bantu saudara kita yang sedang tertimpa musibah.</string>
     <string name="judul">Bantu Saudara Kita Terkena Bencana Longsor Bandang</string>
     <string name="nama_kategori">Kebakaran</string>
+    <string name="tv_fotoprofil">Tambah foto profil</string>
+    <string name="btn_selesai">Selesai</string>
 
     <string-array name="kategori_bencana">
         <item>Pilih Kategori</item>

@@ -5,14 +5,15 @@ import android.os.Parcelable;
 
 public class Bencana implements Parcelable {
 
-    private String idbencana, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor;
+    private String idbencana, idUser, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor;
     private boolean status;
 
     public Bencana() {
     }
 
-    public Bencana(String idbencana, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, boolean status) {
+    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, boolean status) {
         this.idbencana = idbencana;
+        this.idUser = idUser;
         this.kategori = kategori;
         this.judul = judul;
         this.alamat = alamat;
@@ -24,6 +25,10 @@ public class Bencana implements Parcelable {
 
     public String getIdbencana() {
         return idbencana;
+    }
+
+    public String getIdUser() {
+        return idUser;
     }
 
     public String getKategori() {
@@ -54,6 +59,7 @@ public class Bencana implements Parcelable {
         return status;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -62,6 +68,7 @@ public class Bencana implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.idbencana);
+        dest.writeString(this.idUser);
         dest.writeString(this.kategori);
         dest.writeString(this.judul);
         dest.writeString(this.alamat);
@@ -73,6 +80,7 @@ public class Bencana implements Parcelable {
 
     protected Bencana(Parcel in) {
         this.idbencana = in.readString();
+        this.idUser = in.readString();
         this.kategori = in.readString();
         this.judul = in.readString();
         this.alamat = in.readString();

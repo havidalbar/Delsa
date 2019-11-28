@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.DetailDataDiriVerifActivity"></activity>
-        <activity android:name=".activities.EditProfileActivity"></activity>
+        <activity android:name=".activities.EditProfileActivity"
+            android:parentActivityName=".activities.MainUserActivity"/>
         <activity
             android:name=".activities.PembayaranActivity"
             android:parentActivityName=".activities.DonasiUangActivity" />

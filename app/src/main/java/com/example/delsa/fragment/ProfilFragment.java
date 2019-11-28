@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.delsa.POJO.User;
 import com.example.delsa.R;
 import com.example.delsa.activities.BuktiDataDiriActivity;
+import com.example.delsa.activities.EditProfileActivity;
 import com.example.delsa.activities.MainActivity;
 import com.example.delsa.activities.MainUserActivity;
 import com.example.delsa.activities.MenuActivity;
@@ -88,7 +89,7 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
         tv_logout.setOnClickListener(this);
         btn_settings.setOnClickListener(this);
         civ_photoProfil.setOnClickListener(this);
-
+        tv_editprofil.setOnClickListener(this);
         auth = FirebaseAuth.getInstance();
         getProfileData();
         accountReference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getUid());
@@ -209,6 +210,9 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
             case R.id.civ_profilimage:
                 dispatchTakePictureIntent();
                 break;
+            case R.id.tv_editProfil:
+                Intent intentEdit = new Intent(getContext(), EditProfileActivity.class);
+                startActivity(intentEdit);
         }
     }
 

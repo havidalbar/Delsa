@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (checkKota(nama)) {
                             adminExist(nama);
                         } else {
-                            registerUser(nama, no, kota, email, password);
+                            registerUser(nama, no, kota, email, password, "", false);
                         }
                     } else {
                         Toast.makeText(this, "Silahkan lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show();
@@ -346,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 email = user.getEmail().toString();
 
-                                writeUser(nama, no, kota, email);
+                                writeUser(nama, no, kota, email, "", false);
                             }
 
                         } else {
@@ -394,12 +394,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (fotoIdentidas.equals("")) {
                         showAlert();
                         PD.dismiss();
+                    } else if (fotoIdentidas.equals("isAdmin")){
+                        PD.dismiss();
+                        Intent intent = new Intent(MainActivity.this, MenuAdminActivity.class);
+                        startActivity(intent);
+                        finish();
+
                     } else {
                         PD.dismiss();
                         Intent intent = new Intent(MainActivity.this, MainUserActivity.class);
                         startActivity(intent);
                         finish();
-
                     }
                 }
 
@@ -460,7 +465,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 if (!checkAdmin) {
-                    registerUser(nama, no, kota, email, password);
+                    registerUser(nama, no, kota, email, password, "isAdmin", true);
                 }
             }
 
@@ -471,13 +476,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void registerUser(final String namaUser, final String noUser, final String kotaUser, final String emailUser, String passwordUser) {
+    private void registerUser(final String namaUser, final String noUser, final String kotaUser, final String emailUser, String passwordUser, final String isAdmin, final boolean statusAdmin) {
 
         auth.createUserWithEmailAndPassword(emailUser, passwordUser).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    writeUser(namaUser, noUser, kotaUser, emailUser);
+                    writeUser(namaUser, noUser, kotaUser, emailUser, isAdmin, statusAdmin);
                 } else {
                     Toast.makeText(MainActivity.this, "Gagal buat akun", Toast.LENGTH_SHORT).show();
                 }
@@ -521,12 +526,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void writeUser(final String namaUser, String noUser, String kotaUser, String emailUser){
+    private void writeUser(final String namaUser, String noUser, String kotaUser, String emailUser, String isAdmin, boolean statusAdmin){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String userId = currentUser.getUid();
 
         createUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-        User user = new User(namaUser, noUser, kotaUser, emailUser, "", "", false);
+        User user = new User(namaUser, noUser, kotaUser, emailUser, isAdmin, "", statusAdmin);
         createUserRef.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

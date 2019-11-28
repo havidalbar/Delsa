@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DetailDataDiriVerifActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:layout_above="@id/lin_btnVerifikasi">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_detail_profile_image_verif"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="40dp"
+                android:layout_centerHorizontal="true"
+                android:elevation="2dp"
+                android:src="@drawable/person"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="4dp"
+                android:layout_gravity="center_horizontal"
+                app:civ_circle_background_color="@android:color/darker_gray" >
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama :"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="I Kadek Yoga Darma Putra"
+                android:layout_marginTop="4dp"
+                android:textSize="16dp"
+                android:id="@+id/tv_nama_detail_verif"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nomor Telephone :"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="081338632506"
+                android:textSize="16dp"
+                android:layout_marginTop="4dp"
+                android:id="@+id/tv_no_detail_verif"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kota :"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Malang"
+                android:textSize="16dp"
+                android:layout_marginTop="4dp"
+                android:id="@+id/tv_kota_detail_verif"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email :"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="kadekyoga@gmail.com"
+                android:textSize="16dp"
+                android:layout_marginTop="4dp"
+                android:id="@+id/tv_email_detail_verif"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Foto Identitas"
+                android:textSize="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/black"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/img_fotoId_detail_verif"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:id="@+id/lin_btnVerifikasi"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Tolak"
+            android:id="@+id/btn_tolak"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Terima"
+            android:id="@+id/btn_terima"
+            android:background="@android:color/holo_green_light"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</RelativeLayout>

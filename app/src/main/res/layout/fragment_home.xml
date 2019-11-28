@@ -186,7 +186,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
 <!--                <LinearLayout-->
@@ -246,7 +246,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_bencanaterdekat"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="180dp"
                     android:layout_marginTop="8dp"
                     tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     tools:listitem="@layout/item_bencana"
@@ -270,8 +270,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_caripahalayuk"
+                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/item_bencana_horizontal"
                     tools:orientation="horizontal"
                     tools:scrollbars="horizontal" />
@@ -321,6 +322,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_kebakaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -350,6 +352,7 @@
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_longsor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -379,6 +382,7 @@
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_banjir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -408,6 +412,7 @@
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_gempabumi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -437,6 +442,7 @@
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_tsunami"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -466,6 +472,7 @@
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_gunungmeletus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -495,6 +502,7 @@
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_putingbeliung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

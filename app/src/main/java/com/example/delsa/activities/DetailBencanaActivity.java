@@ -1,9 +1,11 @@
 package com.example.delsa.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,14 +14,29 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.delsa.POJO.Bencana;
+import com.example.delsa.POJO.User;
 import com.example.delsa.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.ContentValues.TAG;
 
 public class DetailBencanaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_donasiSekarang;
-    private TextView tv_judulbencana, tv_alamatbencana, tv_deskripsibencana;
+    private TextView tv_judulbencana, tv_alamatbencana, tv_deskripsibencana, tv_namaprofil;
     private ImageView iv_fotobencana;
     private Bencana bencana;
+    private CircleImageView civ_fotoprofil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +52,11 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
         tv_alamatbencana = findViewById(R.id.tv_alamatbencana);
         tv_deskripsibencana = findViewById(R.id.tv_deskripsibencana);
         iv_fotobencana = findViewById(R.id.iv_fotobencana);
+        tv_namaprofil = findViewById(R.id.tv_namaprofil);
+        civ_fotoprofil = findViewById(R.id.civ_profilimage);
 
         displayDetailBencana(bencana);
-
+        getProfileData();
         btn_donasiSekarang = findViewById(R.id.btn_donasiSekarang);
         btn_donasiSekarang.setOnClickListener(this);
     }
@@ -58,5 +77,27 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void getProfileData() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users").child(Objects.requireNonNull(bencana.getIdUser()));
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                tv_namaprofil.setText(Objects.requireNonNull(user).getNama());
+                if (!user.getFotoProfil().equals("")) {
+                    Picasso.get().load(user.getFotoProfil()).into(civ_fotoprofil);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 }

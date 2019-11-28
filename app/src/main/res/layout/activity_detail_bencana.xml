@@ -90,6 +90,7 @@
             android:orientation="horizontal">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
+                android:id="@+id/civ_profilimage"
                 android:layout_height="30dp"
                 android:src="@drawable/person"
                 app:civ_circle_background_color="@android:color/darker_gray"/>
@@ -97,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:textColor="@android:color/black"
+                android:id="@+id/tv_namaprofil"
                 android:layout_height="wrap_content"
                 android:text="Riefqy Ardhya Bisma"/>
 

@@ -23,12 +23,12 @@ import com.example.delsa.activities.DetailBencanaActivity;
 
 import java.util.ArrayList;
 
-public class AdapterBencana extends RecyclerView.Adapter<AdapterBencana.ViewHolder> {
+public class AdapterBencanaTerdekat extends RecyclerView.Adapter<AdapterBencanaTerdekat.ViewHolder> {
 
     private final Context context;
     private final ArrayList<Bencana> list_bencana = new ArrayList<>();
 
-    public AdapterBencana(Context context) {
+    public AdapterBencanaTerdekat(Context context) {
         this.context = context;
     }
 
@@ -41,7 +41,7 @@ public class AdapterBencana extends RecyclerView.Adapter<AdapterBencana.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_bencana_horizontal, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_bencana, parent, false);
         final ViewHolder holder = new ViewHolder(v);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,18 +67,18 @@ public class AdapterBencana extends RecyclerView.Adapter<AdapterBencana.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_fotobencana;
         private final TextView tv_judulbencana;
-        private final TextView tv_deskripsi;
+        private final TextView tv_kategori;
 
         ViewHolder(View itemView) {
             super(itemView);
             iv_fotobencana = itemView.findViewById(R.id.iv_fotobencana);
             tv_judulbencana = itemView.findViewById(R.id.tv_judulbencana);
-            tv_deskripsi = itemView.findViewById(R.id.tv_deskripsibencana);
+            tv_kategori = itemView.findViewById(R.id.tv_kategori);
         }
 
         void bind(Bencana bencana){
             tv_judulbencana.setText(bencana.getJudul());
-            tv_deskripsi.setText(bencana.getDeskripsi());
+            tv_kategori.setText(bencana.getKategori());
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));
             Glide.with(itemView.getContext())

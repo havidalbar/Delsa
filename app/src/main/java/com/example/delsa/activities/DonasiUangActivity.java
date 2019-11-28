@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
 
 public class DonasiUangActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
@@ -24,7 +25,7 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
     private EditText et_nominaldonasi, et_pesandonasi;
     private Button btn_donasikan;
     private Switch sw_anonim;
-
+    private Bencana bencana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

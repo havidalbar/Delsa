@@ -63,6 +63,7 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     private DatabaseReference accountReference;
     private String judulBencana, alamatBencana, deskripsiBencana, kategoriBencana;
     private ProgressDialog PD;
+    private String key;
 
     public TambahFragment() {
         // Required empty public constructor
@@ -86,6 +87,8 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         accountReference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getUid());
+
+        key = FirebaseDatabase.getInstance().getReference().child("Bencana").push().getKey();
         return view;
     }
 
@@ -177,15 +180,10 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private String getKey(){
-        String key = FirebaseDatabase.getInstance().getReference().child("Bencana").push().getKey();
-        return key;
-    }
-
     private void storePhotoIdentity(byte[] dataFoto) {
         String uid = auth.getUid();
 
-        photoDataDiriRef = FirebaseStorage.getInstance().getReference().child("images").child("photo_bencana").child(getKey() + ".jpg");
+        photoDataDiriRef = FirebaseStorage.getInstance().getReference().child("images").child("photo_bencana").child(key + ".jpg");
         UploadTask uploadTask = photoDataDiriRef.putBytes(dataFoto);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -213,8 +211,8 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     }
 
     private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana, String fotobencana) {
-        DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(getKey());
-        Bencana bencana = new Bencana(kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),false);
+        DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(key);
+        Bencana bencana = new Bencana(key,kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),false);
         myRef.setValue(bencana);
         PD.dismiss();
     }

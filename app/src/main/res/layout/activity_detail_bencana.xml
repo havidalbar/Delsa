@@ -31,7 +31,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageSlider"
+                    android:id="@+id/iv_fotobencana"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="centerCrop"
@@ -47,7 +47,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/namatempat"
+            android:id="@+id/tv_judulbencana"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -60,7 +60,7 @@
             tools:targetApi="o" />
 
         <TextView
-            android:id="@+id/alamattempat"
+            android:id="@+id/tv_alamatbencana"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_location_on_black_24dp"
@@ -120,6 +120,7 @@
             tools:targetApi="o" />
 
         <TextView
+            android:id="@+id/tv_deskripsibencana"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"

@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="16dp"
-    android:paddingHorizontal="16dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:src="@drawable/dummybencana"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -16,34 +27,31 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
                 android:textColor="#000000"
-                android:text="Waspada bencana jarak 3,2 km area Lowokwaru, Malang, Jawa Timur."
+                android:text="Bantu Saudara Kita Terkena Bencana Longsor Bandang"
                 android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="16dp">
+                android:paddingBottom="4dp">
 
                 <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="Bencana"
-                    android:textColor="#61c9ff"/>
-
-                <TextView
-                    android:gravity="right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="30 menit lalu"/>
+                    android:text="16 April 2019 pukul 14.30" />
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Belum tersalurkan" />
+
+
         </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:background="@android:color/darker_gray"
-        android:layout_height="0.5dp"/>
 
     </LinearLayout>
+
+</LinearLayout>

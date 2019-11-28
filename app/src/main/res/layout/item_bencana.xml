@@ -23,10 +23,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_sisaharibencana"
+        android:id="@+id/tv_kategori"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
-        android:text="Kamimampu.com | 15 hari tersisa"/>
+        android:text="Longsor"/>
 
 </LinearLayout>

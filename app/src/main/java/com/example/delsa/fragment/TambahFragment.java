@@ -2,6 +2,7 @@ package com.example.delsa.fragment;
 
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
+import com.example.delsa.activities.MainActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +37,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +62,8 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     private StorageReference photoDataDiriRef;
     private DatabaseReference accountReference;
     private String judulBencana, alamatBencana, deskripsiBencana, kategoriBencana;
+    private ProgressDialog PD;
+    private String key;
 
     public TambahFragment() {
         // Required empty public constructor
@@ -78,6 +87,8 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         accountReference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getUid());
+
+        key = FirebaseDatabase.getInstance().getReference().child("Bencana").push().getKey();
         return view;
     }
 
@@ -97,6 +108,15 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
             case R.id.iv_fotoBencana:
                 dispatchTakePictureIntent();
                 break;
+            case R.id.btn_kembalikehome:
+                Fragment fragment = new HomeFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_frame, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                dialog.dismiss();
+                break;
         }
     }
 
@@ -109,7 +129,13 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
                 spnKategoriBencana.getSelectedItemPosition() == 0) {
             Toast.makeText(getContext(), "Lengkapi data diatas", Toast.LENGTH_SHORT).show();
         } else {
+            PD = new ProgressDialog(getContext());
+            PD.setMessage("Loading...");
+            PD.setCancelable(true);
+            PD.setCanceledOnTouchOutside(false);
+            PD.show();
             storePhotoIdentity(dataFoto);
+            openDialogTambahBencanaSukses();
         }
     }
 
@@ -120,6 +146,14 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         Button btn_yatambahbencana = dialog.findViewById(R.id.btn_yatambahbencana);
         btn_cekkembalitambahbencana.setOnClickListener(this);
         btn_yatambahbencana.setOnClickListener(this);
+        dialog.show();
+    }
+
+    private void openDialogTambahBencanaSukses() {
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialog_konfirmasi_bencana_success);
+        Button btn_kembalikehome = dialog.findViewById(R.id.btn_kembalikehome);
+        btn_kembalikehome.setOnClickListener(this);
         dialog.show();
     }
 
@@ -146,15 +180,10 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private String getKey(){
-        String key = FirebaseDatabase.getInstance().getReference().child("Bencana").push().getKey();
-        return key;
-    }
-
     private void storePhotoIdentity(byte[] dataFoto) {
         String uid = auth.getUid();
 
-        photoDataDiriRef = FirebaseStorage.getInstance().getReference().child("images").child("photo_bencana").child(getKey() + ".jpg");
+        photoDataDiriRef = FirebaseStorage.getInstance().getReference().child("images").child("photo_bencana").child(key + ".jpg");
         UploadTask uploadTask = photoDataDiriRef.putBytes(dataFoto);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -182,9 +211,10 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
     }
 
     private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana, String fotobencana) {
-        DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(getKey());
-        Bencana bencana = new Bencana(kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana);
+        DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(key);
+        Bencana bencana = new Bencana(key,kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),false);
         myRef.setValue(bencana);
+        PD.dismiss();
     }
 
     @Override
@@ -200,5 +230,14 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         });
         dialog.show();
         super.onStart();
+    }
+
+    private String getTodayDate(){
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("MMMM dd, yyyy");
+        String formattedDate = df.format(c);
+        return formattedDate;
     }
 }

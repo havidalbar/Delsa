@@ -3,6 +3,7 @@ package com.example.delsa.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
 
 public class DonasiUangActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
@@ -23,7 +25,7 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
     private EditText et_nominaldonasi, et_pesandonasi;
     private Button btn_donasikan;
     private Switch sw_anonim;
-
+    private Bencana bencana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +152,9 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
 
                 if(!metode.equals("")) {
                     Toast.makeText(this, et_nominaldonasi.getText().toString() + ',' + et_pesandonasi.getText().toString() + ',' + sw_anonim.isChecked() + ',' + metode, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DonasiUangActivity.this,PembayaranActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 break;
         }

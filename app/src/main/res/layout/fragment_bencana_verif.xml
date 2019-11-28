@@ -8,6 +8,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rcv_bencana_verif">
+        android:id="@+id/rcv_bencana_verif"
+        tools:listitem="@layout/layout_verif_bencana">
     </androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>

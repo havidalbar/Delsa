@@ -1,22 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.DetailBencanaActivity">
 
-    <Button
-        android:id="@+id/btn_donasiSekarang"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/btnorange"
-        android:text="@string/donasi_sekarang"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"/>
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/backbutton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/ic_arrow_back"
+                android:backgroundTint="@android:color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dummybencana" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/trending_gradient_shape_2" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/namatempat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center_vertical"
+            android:text="@string/bantu_para_korban_dengan_mendonasikan_pakaian_baru_bekas"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:targetApi="o" />
+
+        <TextView
+            android:id="@+id/alamattempat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:text="Malang, Jawa Timur"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:targetApi="o" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            tools:targetApi="o" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/person"
+                app:civ_circle_background_color="@android:color/darker_gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="@android:color/black"
+                android:layout_height="wrap_content"
+                android:text="Riefqy Ardhya Bisma"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:layout_marginHorizontal="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 hari tersisa"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/darker_gray"
+            tools:targetApi="o" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:text="Lorem ipsum dolor ait amet conector alt. Awos et ente porte forte naruto sasuke kakashi kiba neji hinata yondaime hokage tsunade jiraiya kushina kyuubi shukaku shodaime ootsutsuki kaguya elon musk tony stark filkom ub"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/darker_gray"
+            tools:targetApi="o" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:text="Donatur"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_komentar"
+            tools:listitem="@layout/item_donatur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Belum ada donatur! Yuk jadi yang pertama"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btn_donasiSekarang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:background="@drawable/btnorange"
+            android:text="@string/donasi_sekarang"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

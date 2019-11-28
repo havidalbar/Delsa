@@ -1,12 +1,17 @@
 package com.example.delsa.fragment;
 
-
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,23 +20,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.delsa.POJO.Bencana;
 import com.example.delsa.activities.DetailBencanaActivity;
 import com.example.delsa.R;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.example.delsa.adapter.AdapterBencana;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private Button btn_kebakaran, btn_longsor, btn_banjir, btn_gempa, btn_others, btn_lihatsemuabencana;
+    private Button btn_kebakaran, btn_longsor, btn_banjir, btn_gempa, btn_others, btn_lihatsemuabencana, btn_refreshlocation;
     private RecyclerView rv_bencanaterdekat, rv_caripahalayuk;
     private TextView tv_lokasi, tv_searchbencana;
     private LinearLayout llkategori;
     private ImageView iv_close;
-    private SlidingUpPanelLayout slideup;
+    private String currentLocation;
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
 
     public HomeFragment() {
@@ -70,7 +85,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         llkategori = view.findViewById(R.id.bottom_sheet_kategori);
 
+        getBencanaTerdekat();
+
         return view;
+    }
+
+    private void getBencanaTerdekat() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Bencana");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Bencana> bencanaterdekat = new ArrayList<>();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    Bencana bencana = dt.getValue(Bencana.class);
+                    Log.d("cek",bencana.getJudul());
+                    bencanaterdekat.add(bencana);
+                }
+                AdapterBencana adapterBencana = new AdapterBencana(getContext());
+                adapterBencana.setData(bencanaterdekat);
+                rv_bencanaterdekat.setAdapter(adapterBencana);
+                rv_bencanaterdekat.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -106,4 +148,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         super.onPause();
     }
+
+
+    private String getCityAndProvince(Location location) throws IOException {
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLatitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+        String city = addresses.get(0).getLocality();
+        String state = addresses.get(0).getAdminArea();
+        String knownName = addresses.get(0).getSubAdminArea();
+
+        String currentLocation = knownName+", "+city+", "+state;
+        return currentLocation;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.delsa.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -150,6 +151,9 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
 
                 if(!metode.equals("")) {
                     Toast.makeText(this, et_nominaldonasi.getText().toString() + ',' + et_pesandonasi.getText().toString() + ',' + sw_anonim.isChecked() + ',' + metode, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DonasiUangActivity.this,PembayaranActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 break;
         }

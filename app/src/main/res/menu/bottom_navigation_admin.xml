@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homebutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_akun_baru"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Akun Baru"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/riwayatbutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_bencana"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Bencana Baru"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/profilebutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Profil"
+        app:showAsAction="never"/>
+
+</menu>

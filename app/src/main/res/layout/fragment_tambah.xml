@@ -82,7 +82,6 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/etbg"
                 android:hint="Contoh: Jl. Kahuripan Menganga no. 4"
-                android:inputType="textPassword"
                 android:paddingHorizontal="16dp" />
 
             <TextView
@@ -102,7 +101,6 @@
                 android:drawableTint="@android:color/darker_gray"
                 android:gravity="start"
                 android:hint="Tulis deskripsi bencana..."
-                android:inputType="textPassword"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="8dp" />
 

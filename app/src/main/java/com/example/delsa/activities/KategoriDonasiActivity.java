@@ -8,17 +8,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
 
 public class KategoriDonasiActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
     private LinearLayout ll_donasipakaian, ll_donasiuang;
+    private Bencana bencana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kategori_donasi);
+
+        bencana = getIntent().getParcelableExtra("bencana");
 
         toolbar = findViewById(R.id.toolbar_donasi);
         toolbar.setTitle("Donasi");
@@ -37,10 +41,12 @@ public class KategoriDonasiActivity extends AppCompatActivity implements View.On
         switch(v.getId()){
             case R.id.ll_donasipakaian:
                 Intent intent = new Intent(KategoriDonasiActivity.this, DonasiPakaianActivity.class);
+                intent.putExtra("bencana",bencana);
                 startActivity(intent);
                 break;
             case R.id.ll_donasiuang:
                 Intent intentUang = new Intent(KategoriDonasiActivity.this, DonasiUangActivity.class);
+                intentUang.putExtra("bencana",bencana);
                 startActivity(intentUang);
                 break;
         }

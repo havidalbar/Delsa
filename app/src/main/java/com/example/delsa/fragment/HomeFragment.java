@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.delsa.KategoriActivity;
+import com.example.delsa.activities.KategoriActivity;
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
 import com.example.delsa.activities.SearchActivity;

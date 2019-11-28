@@ -4,8 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".KategoriActivity">
+    tools:context=".activities.KategoriActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include
+        android:id="@+id/toolbar_donasi_uang"
+        layout="@layout/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_kategori"/>
 
 </LinearLayout>

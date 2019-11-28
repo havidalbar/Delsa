@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="16dp"
+    android:layout_height="100dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginHorizontal="16dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_fotobencana"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dummybencana" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_judulbencana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bantu saudara kita terkena bencana Longsor Bandang"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kamimampu.com | 15 hari tersisa" />
+
+        <TextView
+            android:id="@+id/tv_deskripsibencana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sebaik-baiknya orang baik masih ada yang baik dari orang terbaik" />
+    </LinearLayout>
+</LinearLayout>

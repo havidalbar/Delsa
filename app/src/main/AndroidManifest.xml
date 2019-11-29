@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.DetailBencanaVerifActivity"></activity>
+        <activity android:name=".activities.ProgresBencanaActivity"></activity>
         <activity android:name=".activities.KategoriActivity" android:parentActivityName=".activities.MainUserActivity"/>
         <activity android:name=".activities.DetailDataDiriVerifActivity" />
         <activity

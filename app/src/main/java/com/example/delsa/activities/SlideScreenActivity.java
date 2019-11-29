@@ -22,7 +22,16 @@ public class SlideScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slide_screen);
 
         Button nextbutton = findViewById(R.id.nextbutton);
+        Button skipbutton = findViewById(R.id.skipbutton);
         nextbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SlideScreenActivity.this, MainActivity.class);
+                startActivity(intent);
+                finishAffinity();
+            }
+        });
+        skipbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SlideScreenActivity.this, MainActivity.class);

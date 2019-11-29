@@ -16,6 +16,13 @@
         android:iconTint="@android:color/darker_gray"
         android:title="Bencana Baru"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/progresbutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_bencana"
+        android:iconTint="@android:color/darker_gray"
+        android:title="Progres Bencana"
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/profilebutton"

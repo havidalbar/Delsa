@@ -32,7 +32,7 @@ import static android.content.ContentValues.TAG;
 
 public class DetailBencanaActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn_donasiSekarang;
+    private Button btn_donasiSekarang, btn_back;
     private TextView tv_judulbencana, tv_alamatbencana, tv_deskripsibencana, tv_namaprofil;
     private ImageView iv_fotobencana;
     private Bencana bencana;
@@ -44,9 +44,6 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_detail_bencana);
 
         bencana = getIntent().getParcelableExtra("bencana");
-        if(bencana != null) {
-            Toast.makeText(this, bencana.getKategori() + bencana.getAlamat() + bencana.getJudul(), Toast.LENGTH_SHORT).show();
-        }
 
         tv_judulbencana = findViewById(R.id.tv_judulbencana);
         tv_alamatbencana = findViewById(R.id.tv_alamatbencana);
@@ -58,7 +55,9 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
         displayDetailBencana(bencana);
         getProfileData();
         btn_donasiSekarang = findViewById(R.id.btn_donasiSekarang);
+        btn_back = findViewById(R.id.btn_back);
         btn_donasiSekarang.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
     }
 
     private void displayDetailBencana(Bencana bencana) {
@@ -76,11 +75,13 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
                 intent.putExtra("bencana",bencana);
                 startActivity(intent);
                 break;
+            case R.id.btn_back:
+                onBackPressed();
+                break;
         }
     }
 
     private void getProfileData() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(Objects.requireNonNull(bencana.getIdUser()));
         myRef.addValueEventListener(new ValueEventListener() {
@@ -89,7 +90,7 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
                 User user = dataSnapshot.getValue(User.class);
                 tv_namaprofil.setText(Objects.requireNonNull(user).getNama());
                 if (!user.getFotoProfil().equals("")) {
-                    Picasso.get().load(user.getFotoProfil()).into(civ_fotoprofil);
+                    Glide.with(getApplicationContext()).load(user.getFotoProfil()).into(civ_fotoprofil);
                 }
             }
 

@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 public class Bencana implements Parcelable {
 
-    private String idbencana, idUser, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor, progress;
+    private String idbencana, idUser, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor,statusPengiriman;
     private boolean status;
 
     public Bencana() {
     }
 
-    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, String progress, boolean status) {
+    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, String statusPengiriman, boolean status) {
         this.idbencana = idbencana;
         this.idUser = idUser;
         this.kategori = kategori;
@@ -20,7 +20,7 @@ public class Bencana implements Parcelable {
         this.deskripsi = deskripsi;
         this.fotoBencana = fotoBencana;
         this.tanggalLapor = tanggalLapor;
-        this.progress = progress;
+        this.statusPengiriman = statusPengiriman;
         this.status = status;
     }
 
@@ -52,12 +52,11 @@ public class Bencana implements Parcelable {
         return fotoBencana;
     }
 
-    public String getTanggalLapor() {
-        return tanggalLapor;
-    }
 
-    public String getProgress() {
-        return progress;
+    public String getTanggalLapor() { return tanggalLapor; }
+
+    public String getStatusPengiriman() {
+        return statusPengiriman;
     }
 
     public boolean isStatus() {
@@ -80,7 +79,7 @@ public class Bencana implements Parcelable {
         dest.writeString(this.deskripsi);
         dest.writeString(this.fotoBencana);
         dest.writeString(this.tanggalLapor);
-        dest.writeString(this.progress);
+        dest.writeString(this.statusPengiriman);
         dest.writeByte(this.status ? (byte) 1 : (byte) 0);
     }
 
@@ -93,7 +92,7 @@ public class Bencana implements Parcelable {
         this.deskripsi = in.readString();
         this.fotoBencana = in.readString();
         this.tanggalLapor = in.readString();
-        this.progress = in.readString();
+        this.statusPengiriman = in.readString();
         this.status = in.readByte() != 0;
     }
 

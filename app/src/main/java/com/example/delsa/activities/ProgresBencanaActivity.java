@@ -78,7 +78,9 @@ public class ProgresBencanaActivity extends AppCompatActivity {
                 String namaUser = dataSnapshot.child("nama").getValue().toString();
                 String fotoUser = dataSnapshot.child("fotoProfil").getValue().toString();
                 tvDetailNamaUserBencana.setText(namaUser);
-                Picasso.get().load(fotoUser).placeholder(R.drawable.person).into(imgFotoUserBencana);
+                if(!fotoUser.isEmpty()) {
+                    Picasso.get().load(fotoUser).placeholder(R.drawable.person).into(imgFotoUserBencana);
+                }
 
             }
 
@@ -93,7 +95,7 @@ public class ProgresBencanaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Map update_status = new HashMap();
-                update_status.put("status", "Tersalurkan");
+                update_status.put("statusPengiriman", "Sudah tersalurkan");
                 bencanaRef.child(idBencana).updateChildren(update_status).addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {

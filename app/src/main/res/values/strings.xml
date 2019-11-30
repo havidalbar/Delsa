@@ -41,4 +41,12 @@
         <item>Gunung Meletus</item>
         <item>Puting Beliung</item>
     </string-array>
+
+    <string-array name="kategori_barang">
+        <item>Pilih Kategori</item>
+        <item>Pakaian</item>
+        <item>Buku</item>
+        <item>Makan dan Minuman</item>
+    </string-array>
+
 </resources>

@@ -18,8 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.DetailBencanaVerifActivity"></activity>
-        <activity android:name=".activities.ProgresBencanaActivity"></activity>
+        <activity android:name=".activities.DetailBencanaVerifActivity"/>
+        <activity android:name=".activities.ProgresBencanaActivity"/>
         <activity android:name=".activities.KategoriActivity" android:parentActivityName=".activities.MainUserActivity"/>
         <activity android:name=".activities.DetailDataDiriVerifActivity" />
         <activity
@@ -46,7 +46,6 @@
             android:name=".activities.KategoriDonasiActivity"
             android:parentActivityName=".activities.DetailBencanaActivity" />
         <activity android:name=".activities.DetailBencanaActivity" />
-        <activity android:name=".activities.InputDataLoginGoogleActivity" />
         <activity android:name=".activities.MainUserActivity" />
         <activity android:name=".activities.BuktiDataDiriActivity" />
         <activity android:name=".activities.MenuAdminActivity" />

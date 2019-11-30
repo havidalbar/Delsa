@@ -140,8 +140,9 @@ public class BencanaVerifFragment extends Fragment {
 
         public void setDisplayPhoto (String foto){
             ImageView fotoBencana = view.findViewById(R.id.img_bencana_verif);
-
-            Picasso.get().load(foto).placeholder(R.drawable.person).into(fotoBencana);
+            if(!foto.isEmpty()) {
+                Picasso.get().load(foto).placeholder(R.drawable.person).into(fotoBencana);
+            }
         }
 
         public void setDisplayNamaBencana (String bencanaName) {

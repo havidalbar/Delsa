@@ -82,12 +82,12 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.ViewHold
             tv_judulriwayat.setText(bencana.getJudul());
             tv_tanggalriwayat.setText(bencana.getTanggalLapor());
             String status = "";
-            if (bencana.isStatus()){
+//            if (bencana.isStatus()){
                 status = "Masih dikumpulkan";
-            } else {
-                status = "Sudah tersalurkan";
-                tv_statusriwayat.setTextColor(Color.parseColor("#ff00ddff"));
-            }
+//            } else {
+//                status = "Sudah tersalurkan";
+//                tv_statusriwayat.setTextColor(Color.parseColor("#ff00ddff"));
+//            }
             tv_statusriwayat.setText(status);
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));

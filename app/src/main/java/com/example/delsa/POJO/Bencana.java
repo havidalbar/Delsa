@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 public class Bencana implements Parcelable {
 
-    private String idbencana, idUser, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor,statusPengiriman,status_kota,kota;
+    private String idbencana, idUser, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor,statusPengiriman,kota;
     private boolean status;
 
     public Bencana() {
     }
 
-    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, String statusPengiriman,boolean status, String status_kota,String kota) {
+    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, String statusPengiriman,boolean status,String kota) {
         this.idbencana = idbencana;
         this.idUser = idUser;
         this.kategori = kategori;
@@ -23,7 +23,6 @@ public class Bencana implements Parcelable {
         this.tanggalLapor = tanggalLapor;
         this.statusPengiriman = statusPengiriman;
         this.status = status;
-        this.status_kota = status_kota;
         this.kota = kota;
     }
 
@@ -45,10 +44,6 @@ public class Bencana implements Parcelable {
 
     public String getAlamat() {
         return alamat;
-    }
-
-    public String getKota() {
-        return kota;
     }
 
     public String getDeskripsi() {
@@ -75,8 +70,6 @@ public class Bencana implements Parcelable {
     }
 
 
-    public String getStatusKota() { return status_kota; }
-
 
     @Override
     public int describeContents() {
@@ -95,7 +88,6 @@ public class Bencana implements Parcelable {
         dest.writeString(this.fotoBencana);
         dest.writeString(this.tanggalLapor);
         dest.writeString(this.statusPengiriman);
-        dest.writeString(this.status_kota);
         dest.writeString(this.kota);
         dest.writeByte(this.status ? (byte) 1 : (byte) 0);
     }
@@ -111,7 +103,6 @@ public class Bencana implements Parcelable {
         this.fotoBencana = in.readString();
         this.tanggalLapor = in.readString();
         this.statusPengiriman = in.readString();
-        this.status_kota = in.readString();
         this.kota = in.readString();
         this.status = in.readByte() != 0;
     }

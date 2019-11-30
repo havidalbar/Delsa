@@ -220,8 +220,7 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String kota = dataSnapshot.child("kota").getValue().toString();
-                String status_kota = "false_"+kota;
-                Bencana bencana = new Bencana(key,auth.getUid(),kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),"Masih dikumpulkan",false,status_kota,kota);
+                Bencana bencana = new Bencana(key,auth.getUid(),kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),"Masih dikumpulkan",false,kota);
                 myRef.setValue(bencana);
                 PD.dismiss();
             }

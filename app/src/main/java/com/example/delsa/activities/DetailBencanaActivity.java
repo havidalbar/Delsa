@@ -54,6 +54,7 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
 
         displayDetailBencana(bencana);
         getProfileData();
+
         btn_donasiSekarang = findViewById(R.id.btn_donasiSekarang);
         btn_back = findViewById(R.id.btn_back);
         btn_donasiSekarang.setOnClickListener(this);

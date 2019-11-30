@@ -12,6 +12,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_judulnotifikasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
@@ -26,12 +27,14 @@
                 android:paddingBottom="16dp">
 
                 <TextView
+                    android:id="@+id/tv_kategorinotifikasi"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Bencana"
                     android:textColor="#61c9ff"/>
 
                 <TextView
+                    android:id="@+id/tv_waktunotifikasi"
                     android:gravity="right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

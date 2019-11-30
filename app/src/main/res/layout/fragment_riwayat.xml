@@ -6,7 +6,7 @@
     tools:context=".fragment.RiwayatFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search"
+        android:id="@+id/rv_riwayat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_notifikasi"

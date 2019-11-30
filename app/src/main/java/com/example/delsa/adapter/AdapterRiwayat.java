@@ -2,6 +2,7 @@ package com.example.delsa.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,12 @@ import com.example.delsa.activities.DetailBencanaActivity;
 
 import java.util.ArrayList;
 
-public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.ViewHolder> {
+public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.ViewHolder> {
 
     private final Context context;
     private final ArrayList<Bencana> list_bencana = new ArrayList<>();
 
-    public AdapterNotifikasi(Context context) {
+    public AdapterRiwayat(Context context) {
         this.context = context;
     }
 
@@ -40,7 +41,7 @@ public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_notifikasi, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_riwayat, parent, false);
         final ViewHolder holder = new ViewHolder(v);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,19 +66,29 @@ public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_fotobencana;
-        private final TextView tv_judulbencana;
-        private final TextView tv_deskripsi;
+        private final TextView tv_judulriwayat;
+        private final TextView tv_tanggalriwayat;
+        private final TextView tv_statusriwayat;
 
         ViewHolder(View itemView) {
             super(itemView);
             iv_fotobencana = itemView.findViewById(R.id.iv_fotobencana);
-            tv_judulbencana = itemView.findViewById(R.id.tv_judulbencana);
-            tv_deskripsi = itemView.findViewById(R.id.tv_deskripsibencana);
+            tv_judulriwayat = itemView.findViewById(R.id.tv_judulriwayat);
+            tv_tanggalriwayat = itemView.findViewById(R.id.tv_tanggalriwayat);
+            tv_statusriwayat = itemView.findViewById(R.id.tv_statusriwayat);
         }
 
         void bind(Bencana bencana){
-            tv_judulbencana.setText(bencana.getJudul());
-            tv_deskripsi.setText(bencana.getDeskripsi());
+            tv_judulriwayat.setText(bencana.getJudul());
+            tv_tanggalriwayat.setText(bencana.getTanggalLapor());
+            String status = "";
+            if (bencana.isStatus()){
+                status = "Masih dikumpulkan";
+            } else {
+                status = "Sudah tersalurkan";
+                tv_statusriwayat.setTextColor(Color.parseColor("#ff00ddff"));
+            }
+            tv_statusriwayat.setText(status);
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));
             Glide.with(itemView.getContext())

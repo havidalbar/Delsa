@@ -11,6 +11,7 @@
         android:padding="16dp">
 
         <ImageView
+            android:id="@+id/iv_fotobencana"
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:src="@drawable/dummybencana"
@@ -23,6 +24,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_judulriwayat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
@@ -37,6 +39,7 @@
                 android:paddingBottom="4dp">
 
                 <TextView
+                    android:id="@+id/tv_tanggalriwayat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="16 April 2019 pukul 14.30" />
@@ -44,6 +47,8 @@
             </LinearLayout>
 
             <TextView
+                android:textStyle="bold"
+                android:id="@+id/tv_statusriwayat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Belum tersalurkan" />

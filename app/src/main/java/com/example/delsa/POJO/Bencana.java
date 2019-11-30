@@ -5,18 +5,19 @@ import android.os.Parcelable;
 
 public class Bencana implements Parcelable {
 
-    private String idbencana, idUser, kategori, judul, alamat, deskripsi, fotoBencana, tanggalLapor,statusPengiriman;
+    private String idbencana, idUser, kategori, judul, alamat, kota, deskripsi, fotoBencana, tanggalLapor,statusPengiriman;
     private boolean status;
 
     public Bencana() {
     }
 
-    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String deskripsi, String fotoBencana, String tanggalLapor, String statusPengiriman, boolean status) {
+    public Bencana(String idbencana, String idUser, String kategori, String judul, String alamat, String kota, String deskripsi, String fotoBencana, String tanggalLapor, String statusPengiriman, boolean status) {
         this.idbencana = idbencana;
         this.idUser = idUser;
         this.kategori = kategori;
         this.judul = judul;
         this.alamat = alamat;
+        this.kota = kota;
         this.deskripsi = deskripsi;
         this.fotoBencana = fotoBencana;
         this.tanggalLapor = tanggalLapor;
@@ -44,6 +45,10 @@ public class Bencana implements Parcelable {
         return alamat;
     }
 
+    public String getKota() {
+        return kota;
+    }
+
     public String getDeskripsi() {
         return deskripsi;
     }
@@ -52,8 +57,9 @@ public class Bencana implements Parcelable {
         return fotoBencana;
     }
 
-
-    public String getTanggalLapor() { return tanggalLapor; }
+    public String getTanggalLapor() {
+        return tanggalLapor;
+    }
 
     public String getStatusPengiriman() {
         return statusPengiriman;
@@ -76,6 +82,7 @@ public class Bencana implements Parcelable {
         dest.writeString(this.kategori);
         dest.writeString(this.judul);
         dest.writeString(this.alamat);
+        dest.writeString(this.kota);
         dest.writeString(this.deskripsi);
         dest.writeString(this.fotoBencana);
         dest.writeString(this.tanggalLapor);
@@ -89,6 +96,7 @@ public class Bencana implements Parcelable {
         this.kategori = in.readString();
         this.judul = in.readString();
         this.alamat = in.readString();
+        this.kota = in.readString();
         this.deskripsi = in.readString();
         this.fotoBencana = in.readString();
         this.tanggalLapor = in.readString();

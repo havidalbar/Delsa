@@ -212,7 +212,7 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
 
     private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana, String fotobencana) {
         DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(key);
-        Bencana bencana = new Bencana(key,auth.getUid(),kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),"Masih dikumpulkan",false);
+        Bencana bencana = new Bencana(key,auth.getUid(),kategoriBencana, judulBencana, alamatBencana, "",deskripsiBencana, fotobencana,getTodayDate(),"Masih dikumpulkan",false);
         myRef.setValue(bencana);
         PD.dismiss();
     }

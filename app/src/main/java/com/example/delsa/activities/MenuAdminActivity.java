@@ -4,12 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.delsa.R;
 import com.example.delsa.fragment.BencanaVerifFragment;
@@ -17,7 +14,6 @@ import com.example.delsa.fragment.DataDiriVerifFragment;
 import com.example.delsa.fragment.ProfilFragment;
 import com.example.delsa.fragment.ProgresBencanaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuAdminActivity extends AppCompatActivity {
 

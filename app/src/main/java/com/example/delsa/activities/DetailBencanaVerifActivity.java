@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.delsa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -94,17 +96,35 @@ public class DetailBencanaVerifActivity extends AppCompatActivity {
         btnTerimaBencana.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map update_status = new HashMap();
-                update_status.put("status", true);
-                bencanaRef.child(idBencana).updateChildren(update_status).addOnCompleteListener(new OnCompleteListener() {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String id = user.getUid();
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(DetailBencanaVerifActivity.this, "Postingan telah diverifikasi", Toast.LENGTH_SHORT).show();
-                            onBackPressed();
-                        }
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String kota = dataSnapshot.child("kota").getValue().toString();
+
+                        Map update_status = new HashMap();
+                        update_status.put("status", true);
+//                        update_status.put("statuskota", "true_" + kota);
+                        bencanaRef.child(idBencana).updateChildren(update_status).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(DetailBencanaVerifActivity.this, "Postingan telah diverifikasi", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
+
             }
         });
 

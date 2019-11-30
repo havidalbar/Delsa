@@ -41,10 +41,21 @@
         <item>Gunung Meletus</item>
         <item>Puting Beliung</item>
     </string-array>
+<<<<<<< HEAD
     <string-array name="penjemputan_barang_pakaian">
         <item>Pakaian</item>
     </string-array>
     <string-array name="penjemputan_barang_makanan">
         <item>Barang</item>
     </string-array>
+=======
+
+    <string-array name="kategori_barang">
+        <item>Pilih Kategori</item>
+        <item>Pakaian</item>
+        <item>Buku</item>
+        <item>Makan dan Minuman</item>
+    </string-array>
+
+>>>>>>> 85a904bc0055808ec7bafa3d905fcdfa8d3f6681
 </resources>

@@ -529,9 +529,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void writeUser(final String namaUser, String noUser, String kotaUser, String emailUser, String isAdmin, boolean statusAdmin){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String userId = currentUser.getUid();
-
+        String status_kota = Boolean.toString(statusAdmin)+"_"+kotaUser;
         createUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-        User user = new User(namaUser, noUser, kotaUser, emailUser, isAdmin, "", statusAdmin);
+        User user = new User(namaUser, noUser, kotaUser, emailUser, isAdmin, "", statusAdmin,status_kota);
         createUserRef.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

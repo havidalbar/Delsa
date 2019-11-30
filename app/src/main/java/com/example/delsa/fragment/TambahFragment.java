@@ -30,8 +30,11 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -210,11 +213,25 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    private void tambahBencanaKeDatabase(String judulBencana, String alamatBencana, String deskripsiBencana, String kategoriBencana, String fotobencana) {
-        DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(key);
-        Bencana bencana = new Bencana(key,auth.getUid(),kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),"Masih dikumpulkan",false);
-        myRef.setValue(bencana);
-        PD.dismiss();
+    private void tambahBencanaKeDatabase(final String judulBencana, final String alamatBencana, final String deskripsiBencana, final String kategoriBencana, final String fotobencana) {
+        final DatabaseReference myRef = firebaseDatabase.getReference("Bencana").child(key);
+
+        accountReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String kota = dataSnapshot.child("kota").getValue().toString();
+                String status_kota = "false_"+kota;
+                Bencana bencana = new Bencana(key,auth.getUid(),kategoriBencana, judulBencana, alamatBencana, deskripsiBencana, fotobencana,getTodayDate(),"Masih dikumpulkan",false,status_kota,kota);
+                myRef.setValue(bencana);
+                PD.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

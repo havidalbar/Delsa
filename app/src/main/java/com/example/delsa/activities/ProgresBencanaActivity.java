@@ -1,5 +1,8 @@
 package com.example.delsa.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,12 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.delsa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,7 @@ public class ProgresBencanaActivity extends AppCompatActivity {
 
     public static final String ID_BENCANA = "id_bencana";
     public static final String NAMA_BENCANA = "nama_bencana";
-//    public static final String NAMA_USER = "nama_user";
+    //    public static final String NAMA_USER = "nama_user";
     public static final String FOTO_BENCANA = "foto_bencana";
     public static final String DESKRIPSI_BENCANA = "deskripsi_bencana";
     public static final String LOKASI_BENCANA = "lokasi_bencana";
@@ -40,7 +42,7 @@ public class ProgresBencanaActivity extends AppCompatActivity {
     private CircleImageView imgFotoUserBencana;
     private DatabaseReference bencanaRef;
 
-    private Button  btnUpdateBencana, btnBack;
+    private Button btnUpdateBencana , btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,23 +92,42 @@ public class ProgresBencanaActivity extends AppCompatActivity {
             }
         });
 
-        btnUpdateBencana = findViewById(R.id.btn_progres_bencana);
-        btnUpdateBencana.setOnClickListener(new View.OnClickListener() {
+        btnUpdateBencana  = findViewById(R.id.btn_progres_bencana);
+        btnUpdateBencana .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map update_status = new HashMap();
-                update_status.put("statusPengiriman", "Sudah tersalurkan");
-                bencanaRef.child(idBencana).updateChildren(update_status).addOnCompleteListener(new OnCompleteListener() {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String id = user.getUid();
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(ProgresBencanaActivity.this, "Pemberian Barang Postingan Ini Sudah Tersalurkan", Toast.LENGTH_SHORT).show();
-                            onBackPressed();
-                        }
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String kota = dataSnapshot.child("kota").getValue().toString();
+
+                        Map update_status = new HashMap();
+                        update_status.put("statusPengiriman", "Sudah tersalurkan");
+//                        update_status.put("statuskota", "true_" + kota);
+                        bencanaRef.child(idBencana).updateChildren(update_status).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(ProgresBencanaActivity.this, "Pemberian Barang Postingan Ini Sudah Tersalurkan", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
+
             }
         });
+
 
         btnBack = findViewById(R.id.btn_back_progres_bencana);
         btnBack.setOnClickListener(new View.OnClickListener() {

@@ -82,11 +82,8 @@ public class BencanaVerifFragment extends Fragment {
                             if (!a.isStatus() && a.getKota().equalsIgnoreCase(kota) ){
                                 list_bencana2.add(a);
                             }
-//                            Toast.makeText(getActivity(), a.getKota(), Toast.LENGTH_SHORT).show();
 
                         }
-
-//                        Toast.makeText(getActivity(), String.valueOf(list_bencana2.size()), Toast.LENGTH_SHORT).show();
 
                         AdapterBencanaVerif adapterBencanaVerif = new AdapterBencanaVerif(getContext());
                         adapterBencanaVerif.setData(list_bencana2);

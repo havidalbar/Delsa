@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.PenjemputanBarangActivity">
+    <include
+        android:id="@+id/toolbar_penjemputan_barang"
+        layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ringkasan Donasi"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginVertical="16dp"/>
+            <Spinner
+                android:id="@+id/spinner_penjemputan_pakaian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/spinner_penjemputan_makanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Foto Barang"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
+            <ImageView
+                android:id="@+id/iv_foto_barang"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lokasi Penjemputan"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
+            <TextView
+                android:id="@+id/tv_penjemputan_barang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/colorPrimary"
+                android:paddingHorizontal="16dp"
+                android:text="Malang, Jawa Timur"
+                android:layout_marginBottom="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <EditText
+                android:id="@+id/et_ket_lokasi"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/etbg"
+                android:inputType="textCapSentences"
+                android:text="Tambahkan Keterangan Lokasi"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="8dp"
+                android:textColor="@android:color/darker_gray"
+                android:paddingHorizontal="16dp"
+                android:maxLines="1"
+                android:lines="1"/>
+            <Button
+                android:id="@+id/btn_selesai"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btnorange"
+                android:text="Selesai"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

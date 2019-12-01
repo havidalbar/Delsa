@@ -12,16 +12,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.delsa.POJO.User;
 import com.example.delsa.R;
-import com.example.delsa.activities.DetailDataDiriVerifActivity;
+import com.example.delsa.activities.DetailBencanaVerifActivity;
+import com.example.delsa.adapter.AdapterDataDiriVerif;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,8 +42,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DataDiriVerifFragment extends Fragment {
 
     private RecyclerView rcvListDataDiriVerif;
-    private Query query;
-    private FirebaseRecyclerAdapter<User, UserViewHolder> firebaseRecyclerAdapter;
 
     public DataDiriVerifFragment() {
         // Required empty public constructor
@@ -46,93 +55,63 @@ public class DataDiriVerifFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_data_diri_verif, container, false);
 
         rcvListDataDiriVerif = view.findViewById(R.id.rcv_akun_verif);
-        rcvListDataDiriVerif.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        query = FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("status").equalTo(false);
-
-        FirebaseRecyclerOptions<User> options = new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(query, User.class)
-                .build();
-
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(options) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull final UserViewHolder holder, final int position, @NonNull final User model) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final ArrayList<User> list_user = new ArrayList<>();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
 
-//                holder.setDisplayPhoto(model.getFotoProfil());
-                holder.setDisplayName(model.getNama());
+                    if (dt.child("status").getValue().toString().equalsIgnoreCase("false") && !dt.child("fotoIdentitas").getValue().toString().equalsIgnoreCase("")){
+                        User user = dt.getValue(User.class);
+                        list_user.add(user);
+                    }
 
-                holder.view.setOnClickListener(new View.OnClickListener() {
+                }
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user.getUid();
+
+                DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+                databaseRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onClick(View view) {
-                        String id = getRef(position).getKey();
-                        String nama = model.getNama();
-//                        String foto = model.getFotoProfil();
-                        String kota = model.getKota();
-                        String email = model.getEmail();
-                        String fotoIdentitas = model.getFotoIdentitas();
-                        String noTelp = model.getNoTelephone();
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        Intent goDetail = new Intent(getActivity(), DetailDataDiriVerifActivity.class);
-                        goDetail.putExtra(DetailDataDiriVerifActivity.ID, id);
-                        goDetail.putExtra(DetailDataDiriVerifActivity.NAMA, nama);
-                        goDetail.putExtra(DetailDataDiriVerifActivity.NO_TELP, noTelp);
-                        goDetail.putExtra(DetailDataDiriVerifActivity.KOTA, kota);
-                        goDetail.putExtra(DetailDataDiriVerifActivity.EMAIL, email);
-                        goDetail.putExtra(DetailDataDiriVerifActivity.FOTO_ID, fotoIdentitas);
-                        startActivity(goDetail);
+                        final ArrayList<User> list_user2 = new ArrayList<>();
+                        String kota = dataSnapshot.child("kota").getValue().toString();
+
+                        for (User a : list_user){
+                            if (a.getKota().equalsIgnoreCase(kota) ){
+                                list_user2.add(a);
+                            }
+
+                        }
+
+                        AdapterDataDiriVerif adapterDataDiriVerif = new AdapterDataDiriVerif(getContext());
+                        adapterDataDiriVerif.setData(list_user2);
+                        rcvListDataDiriVerif.setAdapter(adapterDataDiriVerif);
+                        rcvListDataDiriVerif.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
+                
+
             }
 
-            @NonNull
             @Override
-            public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_verif_data_diri, parent, false);
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                return new UserViewHolder(view1);
             }
-        };
-
-        rcvListDataDiriVerif.setAdapter(firebaseRecyclerAdapter);
+        });
 
         return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        firebaseRecyclerAdapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        firebaseRecyclerAdapter.stopListening();
-    }
-
-    public class UserViewHolder extends RecyclerView.ViewHolder{
-
-        View view;
-
-        public UserViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            view = itemView;
-        }
-
-//        public void setDisplayPhoto (String foto){
-//            CircleImageView fotoUser = view.findViewById(R.id.civ_profile_image_verif);
-//
-//            Picasso.get().load(foto).placeholder(R.drawable.person).into(fotoUser);
-//        }
-
-        public void setDisplayName (String nama) {
-            TextView namaUser = view.findViewById(R.id.tv_nama_verif);
-
-            namaUser.setText(nama);
-        }
     }
 
 }

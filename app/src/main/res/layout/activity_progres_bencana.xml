@@ -145,7 +145,7 @@
             android:layout_weight="1"
             android:text="Update Status Sampai"
             android:id="@+id/btn_progres_bencana"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/btnorange"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

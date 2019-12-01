@@ -4,10 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.DataDiriVerifFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
 
+        <TextView
+            android:id="@+id/tv_title_verif_user"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginVertical="8dp"
+            android:gravity="center_vertical"
+            android:iconifiedByDefault="false"
+            android:paddingHorizontal="12dp"
+            android:text="Daftar User"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            tools:targetApi="o" />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         android:id="@+id/rcv_akun_verif"
         tools:listitem="@layout/layout_verif_data_diri">
     </androidx.recyclerview.widget.RecyclerView>

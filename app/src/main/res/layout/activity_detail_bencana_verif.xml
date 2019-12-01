@@ -144,8 +144,8 @@
             android:layout_weight="1"
             android:text="Tolak"
             android:id="@+id/btn_tolak_bencana"
-            android:background="@android:color/holo_red_dark"
-            android:textColor="@android:color/white"/>
+            android:background="@drawable/btnwhiteborder"
+            android:textColor="@color/colorPrimaryDark" />
 
         <Button
             android:layout_width="match_parent"
@@ -153,7 +153,7 @@
             android:layout_weight="1"
             android:text="Terima"
             android:id="@+id/btn_terima_bencana"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/btnorange"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

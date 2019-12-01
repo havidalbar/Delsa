@@ -29,26 +29,6 @@ public class MainUserActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String id = user.getUid();
-
-            DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
-            userInfo.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String status = dataSnapshot.child("status").getValue().toString();
-                    if(!Boolean.valueOf(status)){
-                        View tambahButton = findViewById(R.id.tambahbutton);
-                        tambahButton.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
             switch (item.getItemId()) {
                 case R.id.homebutton:
                     HomeFragment homeFragment = new HomeFragment();
@@ -89,25 +69,6 @@ public class MainUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String id = user.getUid();
-
-        DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
-        userInfo.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String status = dataSnapshot.child("status").getValue().toString();
-                if(!Boolean.valueOf(status)){
-                    View tambahButton = findViewById(R.id.tambahbutton);
-                    tambahButton.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 

@@ -83,6 +83,16 @@
                     android:textColor="@android:color/black"
                     android:textSize="24dp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_status_profil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="None"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_lokasiprofil"

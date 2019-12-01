@@ -25,11 +25,29 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainUserActivity extends AppCompatActivity {
 
-    private boolean cek = false;
     private final BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getUid();
+
+            DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+            userInfo.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String status = dataSnapshot.child("status").getValue().toString();
+                    if(!Boolean.valueOf(status)){
+                        View tambahButton = findViewById(R.id.tambahbutton);
+                        tambahButton.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
             switch (item.getItemId()) {
                 case R.id.homebutton:
@@ -74,14 +92,12 @@ public class MainUserActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
 
-        DatabaseReference adminInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
-        adminInfo.addValueEventListener(new ValueEventListener() {
+        DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        userInfo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String status = dataSnapshot.child("status").getValue().toString();
-                if(Boolean.valueOf(status)){
-                    cek = true;
-                }else{
+                if(!Boolean.valueOf(status)){
                     View tambahButton = findViewById(R.id.tambahbutton);
                     tambahButton.setVisibility(View.GONE);
                 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.delsa.R;
 import com.example.delsa.fragment.HomeFragment;
@@ -14,6 +15,13 @@ import com.example.delsa.fragment.ProfilFragment;
 import com.example.delsa.fragment.RiwayatFragment;
 import com.example.delsa.fragment.TambahFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainUserActivity extends AppCompatActivity {
 
@@ -21,6 +29,25 @@ public class MainUserActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getUid();
+
+            DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+            userInfo.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String status = dataSnapshot.child("status").getValue().toString();
+                    if(!Boolean.valueOf(status)){
+                        View tambahButton = findViewById(R.id.tambahbutton);
+                        tambahButton.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
             switch (item.getItemId()) {
                 case R.id.homebutton:
@@ -62,7 +89,25 @@ public class MainUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();
 
+        DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        userInfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.child("status").getValue().toString();
+                if(!Boolean.valueOf(status)){
+                    View tambahButton = findViewById(R.id.tambahbutton);
+                    tambahButton.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 

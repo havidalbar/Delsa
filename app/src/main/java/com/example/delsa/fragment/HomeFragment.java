@@ -115,8 +115,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ArrayList<Bencana> bencanaterdekat = new ArrayList<>();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Bencana bencana = dt.getValue(Bencana.class);
-                    Log.d("cek", bencana.getJudul());
-                    bencanaterdekat.add(bencana);
+                        bencanaterdekat.add(bencana);
                 }
                 AdapterBencanaTerdekat adapterBencanaTerdekat = new AdapterBencanaTerdekat(getContext());
                 adapterBencanaTerdekat.setData(bencanaterdekat);
@@ -140,7 +139,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ArrayList<Bencana> list_bencana = new ArrayList<>();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Bencana bencana = dt.getValue(Bencana.class);
-                    list_bencana.add(bencana);
+                        list_bencana.add(bencana);
                 }
                 AdapterBencana adapterBencana = new AdapterBencana(getContext());
                 adapterBencana.setData(list_bencana);

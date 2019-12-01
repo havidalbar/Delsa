@@ -6,8 +6,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
-
 import com.example.delsa.R;
 import com.example.delsa.fragment.BencanaVerifFragment;
 import com.example.delsa.fragment.DataDiriVerifFragment;
@@ -17,7 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MenuAdminActivity extends AppCompatActivity {
 
-    private Button btnLogout;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -68,18 +65,5 @@ public class MenuAdminActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         setTitle("Data diri");
 
-
-
-//        btnLogout = findViewById(R.id.btn_logoutAdmin);
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseAuth.getInstance().signOut();
-//                Toast.makeText(MenuAdminActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MenuAdminActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finishAffinity();
-//            }
-//        });
     }
 }

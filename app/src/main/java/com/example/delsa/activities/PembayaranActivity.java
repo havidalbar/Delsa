@@ -13,17 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.delsa.POJO.Donasi;
+import com.example.delsa.POJO.DonasiUang;
 import com.example.delsa.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class PembayaranActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar toolbar;
-    private Donasi donasi;
+    private DonasiUang donasiUang;
     private TextView tv_total, tv_nominal, tv_kodeunik, tv_totalharga;
     private Button btn_selesai;
     private TextView tv_salinbri, tv_salinmandiri, tv_salinbni, tv_peringatanpembayaran;
@@ -33,7 +29,7 @@ public class PembayaranActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pembayaran);
 
-        donasi = getIntent().getParcelableExtra("donasi");
+        donasiUang = getIntent().getParcelableExtra("donasiUang");
 
         tv_total = findViewById(R.id.tv_total);
         tv_nominal = findViewById(R.id.tv_nominal);
@@ -59,11 +55,11 @@ public class PembayaranActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void displayData() {
-        tv_total.setText("Rp " + donasi.getTotalpembayaran());
-        tv_nominal.setText("Rp " + donasi.getNominal());
-        tv_kodeunik.setText("Rp " + donasi.getKodeunik());
-        tv_totalharga.setText("Rp " + donasi.getTotalpembayaran());
-        tv_peringatanpembayaran.setText("Lakukan pembayaran sebelum "+donasi.getBataspembayaran()+" 18.00 WIB sebelum donasi dibatalkan oleh sistem");
+        tv_total.setText("Rp " + donasiUang.getTotalpembayaran());
+        tv_nominal.setText("Rp " + donasiUang.getNominal());
+        tv_kodeunik.setText("Rp " + donasiUang.getKodeunik());
+        tv_totalharga.setText("Rp " + donasiUang.getTotalpembayaran());
+        tv_peringatanpembayaran.setText("Lakukan pembayaran sebelum "+ donasiUang.getBataspembayaran()+" 18.00 WIB sebelum donasi dibatalkan oleh sistem");
     }
 
     @Override

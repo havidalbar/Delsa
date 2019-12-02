@@ -17,15 +17,17 @@ public class KategoriDonasiActivity extends AppCompatActivity implements View.On
     private LinearLayout ll_donasipakaian, ll_donasiuang;
     private Bencana bencana;
 
+    public static final String EXTRA_BENCANA = "bencana";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kategori_donasi);
 
-        bencana = getIntent().getParcelableExtra("bencana");
+        bencana = getIntent().getParcelableExtra(EXTRA_BENCANA);
 
         toolbar = findViewById(R.id.toolbar_donasi);
-        toolbar.setTitle("Donasi");
+        toolbar.setTitle("DonasiUang");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -41,12 +43,12 @@ public class KategoriDonasiActivity extends AppCompatActivity implements View.On
         switch(v.getId()){
             case R.id.ll_donasipakaian:
                 Intent intent = new Intent(KategoriDonasiActivity.this, DonasiPakaianActivity.class);
-                intent.putExtra("bencana",bencana);
+                intent.putExtra(EXTRA_BENCANA,bencana);
                 startActivity(intent);
                 break;
             case R.id.ll_donasiuang:
                 Intent intentUang = new Intent(KategoriDonasiActivity.this, DonasiUangActivity.class);
-                intentUang.putExtra("bencana",bencana);
+                intentUang.putExtra(EXTRA_BENCANA,bencana);
                 startActivity(intentUang);
                 break;
         }

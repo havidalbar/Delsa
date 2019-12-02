@@ -16,7 +16,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.delsa.POJO.Bencana;
-import com.example.delsa.POJO.Donasi;
+import com.example.delsa.POJO.DonasiUang;
 import com.example.delsa.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.example.delsa.activities.KategoriDonasiActivity.EXTRA_BENCANA;
 
 public class DonasiUangActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
@@ -36,7 +38,7 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
     private Switch sw_anonim;
     private Bencana bencana;
     private int random;
-    private Donasi donasi;
+    private DonasiUang donasiUang;
     private String key;
     private ProgressDialog PD;
 
@@ -45,12 +47,12 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donasi_uang);
 
-        bencana = getIntent().getParcelableExtra("bencana");
+        bencana = getIntent().getParcelableExtra(EXTRA_BENCANA);
 
         random = (int) (Math.random() * (999 - 0));
 
         toolbar = findViewById(R.id.toolbar_donasi_uang);
-        toolbar.setTitle("Donasi Uang");
+        toolbar.setTitle("DonasiUang Uang");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -178,7 +180,7 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
                     PD.show();
                     donasiBencanaKeDatabase(bencana,et_nominaldonasi.getText().toString(),et_pesandonasi.getText().toString(),metode,sw_anonim.isChecked());
                     Intent intent = new Intent(DonasiUangActivity.this,PembayaranActivity.class);
-                    intent.putExtra("donasi",donasi);
+                    intent.putExtra("donasiUang", donasiUang);
                     startActivity(intent);
                     finish();
                 }
@@ -192,11 +194,11 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
         int total = nominal + random;
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        key = FirebaseDatabase.getInstance().getReference().child("Donasi").push().getKey();
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi").child(key);
+        key = FirebaseDatabase.getInstance().getReference().child("Donasi Uang").push().getKey();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi Uang").child(key);
 
-        donasi = new Donasi(key,auth.getUid(),bencana.getIdbencana(),String.valueOf(nominal),String.valueOf(random),String.valueOf(total),metode,pesan,getTomorrowDate(),"",anonim,false);
-        myRef.setValue(donasi);
+        donasiUang = new DonasiUang(key,auth.getUid(),bencana.getIdbencana(),String.valueOf(nominal),String.valueOf(random),String.valueOf(total),metode,pesan,getTomorrowDate(),getTodayDate(),anonim,false);
+        myRef.setValue(donasiUang);
         PD.dismiss();
     }
 
@@ -205,6 +207,18 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
         Date today = calendar.getTime();
 
         calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        String formattedDate = df.format(tomorrow);
+        return formattedDate;
+    }
+
+    private String getTodayDate(){
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        calendar.add(Calendar.DAY_OF_YEAR, 0);
         Date tomorrow = calendar.getTime();
 
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");

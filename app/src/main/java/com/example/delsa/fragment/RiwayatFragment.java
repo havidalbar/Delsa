@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.delsa.POJO.Bencana;
-import com.example.delsa.POJO.Donasi;
+import com.example.delsa.POJO.DonasiUang;
 import com.example.delsa.R;
 import com.example.delsa.adapter.AdapterRiwayat;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,16 +48,16 @@ public class RiwayatFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("Donasi");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("DonasiUang Uang");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final ArrayList<Donasi> usedDonasi = new ArrayList<>();
+                final ArrayList<DonasiUang> usedDonasiUang = new ArrayList<>();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                    Donasi donasi = dt.getValue(Donasi.class);
-                    if (donasi.getIdUser().equals(auth.getUid())) {
-                        usedDonasi.add(donasi);
-                        Log.d("cek", donasi.getIdUser());
+                    DonasiUang donasiUang = dt.getValue(DonasiUang.class);
+                    if (donasiUang.getIdUser().equals(auth.getUid())) {
+                        usedDonasiUang.add(donasiUang);
+                        Log.d("cek", donasiUang.getIdUser());
                     }
                 }
 
@@ -70,7 +70,7 @@ public class RiwayatFragment extends Fragment {
                         ArrayList<Bencana> listbencana = new ArrayList<>();
                         for (DataSnapshot dt : dataSnapshot.getChildren()) {
                             Bencana bencana = dt.getValue(Bencana.class);
-                            for (Donasi d : usedDonasi) {
+                            for (DonasiUang d : usedDonasiUang) {
                                 if (d.getIdBencana().equals(bencana.getIdbencana())) {
                                     listbencana.add(bencana);
                                 }

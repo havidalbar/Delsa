@@ -90,7 +90,6 @@
                                     android:layout_height="40dp"
                                     android:hint="@string/nominal_hint"
                                     android:inputType="number"
-                                    android:textColorHint="@android:color/black"
                                     android:textAlignment="textStart"
                                     android:textColor="@android:color/black"
                                     android:background="@drawable/etbg"
@@ -230,7 +229,6 @@
                                     android:layout_height="40dp"
                                     android:hint="@string/nominal_hint"
                                     android:inputType="number"
-                                    android:textColorHint="@android:color/black"
                                     android:textAlignment="textStart"
                                     android:textColor="@android:color/black"
                                     android:background="@drawable/etbg"
@@ -313,7 +311,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:background="@drawable/button_round_corner"
+                android:background="@drawable/btnorange"
                 android:layout_margin="16dp"/>
 
         </LinearLayout>

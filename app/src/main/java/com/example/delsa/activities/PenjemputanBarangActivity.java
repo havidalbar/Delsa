@@ -38,8 +38,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -65,7 +68,7 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
     private LinearLayout ll_pakaian, ll_makanan;
     private TextView tv_jumlahbarangpakaian, tv_deskripsi_pakaian, tv_jumlahbarangmakanan, tv_deskripsi_makanan, tv_penjemputanbarang;
     private ImageView iv_fotobarangdonasi;
-    private EditText et_ket_lokasi;
+    private EditText et_ket_lokasi, et_pesandonasi;
     private Button btn_donasibarang;
     private Bencana bencana;
     private Switch sw_anonim;
@@ -82,6 +85,7 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
     private String jumlah;
     private String deskripsi;
     private String koordinat;
+    private String nama;
 
     static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
 
@@ -113,6 +117,7 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
         iv_fotobarangdonasi = findViewById(R.id.iv_foto_barang);
         iv_fotobarangdonasi.setOnClickListener(this);
         et_ket_lokasi = findViewById(R.id.et_ket_lokasi);
+        et_pesandonasi = findViewById(R.id.et_pesandonasi);
         btn_donasibarang = findViewById(R.id.btn_selesai);
         btn_donasibarang.setOnClickListener(this);
 
@@ -228,7 +233,7 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi Barang").child(key);
 
         String alamat = et_ket_lokasi.getText().toString();
-        DonasiBarang donasiBarang = new DonasiBarang(key,auth.getUid(),bencana.getIdbencana(),kategori,koordinat, alamat,tv_penjemputanbarang.getText().toString(), jumlah,deskripsi,url_photo,getTodayDate(),sw_anonim.isChecked());
+        DonasiBarang donasiBarang = new DonasiBarang(key,auth.getUid(),bencana.getIdbencana(),kategori,koordinat, alamat,tv_penjemputanbarang.getText().toString(), jumlah,deskripsi,url_photo,getTodayDate(),et_pesandonasi.getText().toString(),nama,sw_anonim.isChecked());
         myRef.setValue(donasiBarang);
         PD.dismiss();
         Intent intent = new Intent(PenjemputanBarangActivity.this, MainUserActivity.class);
@@ -344,5 +349,28 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 50, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,5000,50, locationListener);
+    }
+
+    private void getName(){
+        nama = "";
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                nama = dataSnapshot.child("nama").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        getName();
+        super.onStart();
     }
 }

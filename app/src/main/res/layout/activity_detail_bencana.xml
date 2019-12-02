@@ -159,7 +159,7 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_komentar"
+            android:id="@+id/rv_donatur"
             tools:listitem="@layout/item_donatur"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

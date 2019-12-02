@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
 import com.example.delsa.activities.MainActivity;
+import com.example.delsa.activities.MainUserActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -114,12 +115,9 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
                 dispatchTakePictureIntent();
                 break;
             case R.id.btn_kembalikehome:
-                Fragment fragment = new HomeFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.main_frame, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                Intent intent = new Intent(getContext(), MainUserActivity.class);
+                startActivity(intent);
+                getActivity().finish();
                 dialog.dismiss();
                 break;
         }

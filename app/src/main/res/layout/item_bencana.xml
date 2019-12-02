@@ -15,6 +15,7 @@ android:layout_marginHorizontal="8dp"    android:orientation="vertical">
         android:id="@+id/tv_judulbencana"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="2"
         android:text="Bantu saudara kita terkena bencana Longsor Bandang"
         android:textColor="@android:color/black"
         android:textSize="16dp"

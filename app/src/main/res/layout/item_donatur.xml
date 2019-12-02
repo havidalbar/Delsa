@@ -8,6 +8,7 @@
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_profildonatur"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:civ_circle_background_color="@android:color/darker_gray"
@@ -19,16 +20,19 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/tv_namadonatur"
             android:layout_height="wrap_content"
             android:text="Asrina Fitri"
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/tv_pesandonatur"
             android:layout_width="match_parent"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"
             android:text="Mendonasikan pakaian"/>
         <TextView
+            android:id="@+id/tv_tanggaldonasi"
             android:layout_width="match_parent"
             android:textSize="12sp"
             android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.delsa.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,8 +20,11 @@ import com.example.delsa.POJO.Bencana;
 import com.example.delsa.POJO.DonasiUang;
 import com.example.delsa.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,6 +45,7 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
     private DonasiUang donasiUang;
     private String key;
     private ProgressDialog PD;
+    private String nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,7 +202,7 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
         key = FirebaseDatabase.getInstance().getReference().child("Donasi Uang").push().getKey();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi Uang").child(key);
 
-        donasiUang = new DonasiUang(key,auth.getUid(),bencana.getIdbencana(),String.valueOf(nominal),String.valueOf(random),String.valueOf(total),metode,pesan,getTomorrowDate(),getTodayDate(),anonim,false);
+        donasiUang = new DonasiUang(key,auth.getUid(),bencana.getIdbencana(),String.valueOf(nominal),String.valueOf(random),String.valueOf(total),metode,pesan,getTomorrowDate(),getTodayDate(),nama,anonim,false);
         myRef.setValue(donasiUang);
         PD.dismiss();
     }
@@ -224,5 +229,29 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
         String formattedDate = df.format(tomorrow);
         return formattedDate;
+    }
+
+
+    private void getName(){
+        nama = "";
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                nama = dataSnapshot.child("nama").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        getName();
+        super.onStart();
     }
 }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.delsa.POJO.Bencana;
+import com.example.delsa.POJO.DonasiBarang;
 import com.example.delsa.POJO.DonasiUang;
 import com.example.delsa.R;
 import com.example.delsa.adapter.AdapterRiwayat;
@@ -48,7 +49,7 @@ public class RiwayatFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("DonasiUang Uang");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Donasi Uang");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -61,25 +62,51 @@ public class RiwayatFragment extends Fragment {
                     }
                 }
 
-
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference("Bencana");
+                DatabaseReference databaseReference = firebaseDatabase.getReference("Donasi Barang");
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ArrayList<Bencana> listbencana = new ArrayList<>();
+                        final ArrayList<DonasiBarang> usedDonasiBarang = new ArrayList<>();
                         for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                            Bencana bencana = dt.getValue(Bencana.class);
-                            for (DonasiUang d : usedDonasiUang) {
-                                if (d.getIdBencana().equals(bencana.getIdbencana())) {
-                                    listbencana.add(bencana);
-                                }
+                            DonasiBarang donasiBarang = dt.getValue(DonasiBarang.class);
+                            if (donasiBarang.getIdUser().equals(auth.getUid())) {
+                                usedDonasiBarang.add(donasiBarang);
+                                Log.d("cek", donasiBarang.getIdUser());
                             }
                         }
-                        AdapterRiwayat adapterRiwayat = new AdapterRiwayat(getContext());
-                        adapterRiwayat.setData(listbencana);
-                        rv_riwayat.setAdapter(adapterRiwayat);
-                        rv_riwayat.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                        DatabaseReference databaseReference = firebaseDatabase.getReference("Bencana");
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                ArrayList<Bencana> listbencana = new ArrayList<>();
+                                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                                    Bencana bencana = dt.getValue(Bencana.class);
+                                    for (DonasiUang d : usedDonasiUang) {
+                                        if (d.getIdBencana().equals(bencana.getIdbencana())) {
+                                            listbencana.add(bencana);
+                                        }
+                                    }
+                                    for (DonasiBarang d : usedDonasiBarang) {
+                                        if (d.getIdBencana().equals(bencana.getIdbencana())) {
+                                            listbencana.add(bencana);
+                                        }
+                                    }
+                                }
+                                AdapterRiwayat adapterRiwayat = new AdapterRiwayat(getContext());
+                                adapterRiwayat.setData(listbencana);
+                                rv_riwayat.setAdapter(adapterRiwayat);
+                                rv_riwayat.setLayoutManager(new LinearLayoutManager(getContext()));
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }
 
                     @Override

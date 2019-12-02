@@ -2,6 +2,8 @@ package com.example.delsa.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,8 +18,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.example.delsa.POJO.Bencana;
+import com.example.delsa.POJO.DonasiBarang;
+import com.example.delsa.POJO.DonasiUang;
+import com.example.delsa.POJO.Donatur;
 import com.example.delsa.POJO.User;
 import com.example.delsa.R;
+import com.example.delsa.adapter.AdapterBencana;
+import com.example.delsa.adapter.AdapterDonatur;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -40,6 +49,7 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
     private ImageView iv_fotobencana;
     private Bencana bencana;
     private CircleImageView civ_fotoprofil;
+    private RecyclerView rv_donatur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +65,60 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
         iv_fotobencana = findViewById(R.id.iv_fotobencana);
         tv_namaprofil = findViewById(R.id.tv_namaprofil);
         civ_fotoprofil = findViewById(R.id.civ_profilimage);
+        rv_donatur = findViewById(R.id.rv_donatur);
 
         displayDetailBencana(bencana);
         getProfileData();
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Donasi Uang");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final ArrayList<Donatur> listdonatur = new ArrayList<>();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    DonasiUang donasiUang = dt.getValue(DonasiUang.class);
+                    Donatur donatur = new Donatur(donasiUang.getNama(),donasiUang.getPesan(),donasiUang.getTgldonasi());
+                    if (donasiUang.getIdBencana().equals(bencana.getIdbencana())) {
+                        listdonatur.add(donatur);
+                    }
+                }
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Donasi Barang");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                            DonasiBarang donasiBarang = dt.getValue(DonasiBarang.class);
+                            String nama = "";
+                            if (donasiBarang.isAnonim()){
+                                nama = "Anonim";
+                            } else {
+                                nama = donasiBarang.getNama();
+                            }
+                            Donatur donatur = new Donatur(nama,donasiBarang.getPesan(),donasiBarang.getTgldonasi());
+                            if(donasiBarang.getIdBencana().equals(bencana.getIdbencana())) {
+                                listdonatur.add(donatur);
+                            }
+                        }
+                        AdapterDonatur adapterDonatur = new AdapterDonatur(getApplicationContext());
+                        adapterDonatur.setData(listdonatur);
+                        rv_donatur.setAdapter(adapterDonatur);
+                        rv_donatur.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         btn_donasiSekarang = findViewById(R.id.btn_donasiSekarang);
         btn_back = findViewById(R.id.btn_back);

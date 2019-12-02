@@ -181,7 +181,6 @@
                 android:drawableLeft="@drawable/ic_edit_black_24dp"
                 android:drawableTint="@android:color/darker_gray"
                 android:drawablePadding="8dp"
-                android:textColor="@android:color/darker_gray"
                 android:paddingHorizontal="16dp"
                 android:maxLines="1"
                 android:lines="1"/>
@@ -206,6 +205,19 @@
                     android:layout_height="wrap_content"
                     android:gravity="center" />
             </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_pesandonasi"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/etbg"
+                android:gravity="start"
+                android:hint="@string/tulis_pesan_opsional"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp" />
+
 
             <Button
                 android:id="@+id/btn_selesai"

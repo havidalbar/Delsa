@@ -74,8 +74,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        kotaSekarang = "";
-
         btn_kebakaran = view.findViewById(R.id.btn_kebakaran);
         btn_longsor = view.findViewById(R.id.btn_longsor);
         btn_banjir = view.findViewById(R.id.btn_banjir);
@@ -244,16 +242,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Geocoder geocoder;
         List<Address> addresses;
         String city = null, state = null, knownName = null;
-        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        if(getContext() != null) {
+            geocoder = new Geocoder(getContext(), Locale.getDefault());
+            try {
+                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
-        try {
-            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                state = addresses.get(0).getAdminArea();
+                city = addresses.get(0).getSubAdminArea();
 
-            state = addresses.get(0).getAdminArea();
-            city = addresses.get(0).getSubAdminArea();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 //        Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
@@ -266,18 +265,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         final LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        final String userId = currentUser.getUid();
-
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 if (location != null) {
                     try {
                         tv_lokasi.setText(getCityAndProvince(location));
-                        Log.d("cek masuk",kotaSekarang);
-
-                        if (!kotaSekarang.equals("")) {
+                        if (kotaSekarang!=null) {
                             Log.d("cek masukssss",kotaSekarang);
                             getBencanaTerdekat();
                         }

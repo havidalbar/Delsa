@@ -21,7 +21,6 @@ public class MainUserActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
             switch (item.getItemId()) {
                 case R.id.homebutton:
                     HomeFragment homeFragment = new HomeFragment();
@@ -62,7 +61,6 @@ public class MainUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 

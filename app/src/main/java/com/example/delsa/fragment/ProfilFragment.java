@@ -58,7 +58,7 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout ll_settings;
     private Button btn_settings;
-    private TextView tv_namaProfil, tv_emailProfil, tv_nomorProfil, tv_logout, tv_editprofil;
+    private TextView tv_namaProfil, tv_emailProfil, tv_nomorProfil, tv_logout, tv_editprofil, tv_statusProfil;
     private CircleImageView civ_photoProfil;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private byte[] dataFoto;
@@ -86,6 +86,7 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
         tv_logout = view.findViewById(R.id.tv_LogOut);
         tv_editprofil = view.findViewById(R.id.tv_editProfil);
         civ_photoProfil = view.findViewById(R.id.civ_profilimage);
+        tv_statusProfil = view.findViewById(R.id.tv_status_profil);
         tv_logout.setOnClickListener(this);
         btn_settings.setOnClickListener(this);
         civ_photoProfil.setOnClickListener(this);
@@ -105,6 +106,11 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
                 User user = dataSnapshot.getValue(User.class);
                 tv_namaProfil.setText(Objects.requireNonNull(user).getNama());
                 tv_emailProfil.setText(user.getEmail());
+                if(user.isStatus()){
+                    tv_statusProfil.setText("Terverifikasi");
+                }else{
+                    tv_statusProfil.setText("Belum Terverifikasi");
+                }
                 tv_nomorProfil.setText(user.getNoTelephone());
                 if (!user.getFotoProfil().equals("")) {
                     Picasso.get().load(user.getFotoProfil()).into(civ_photoProfil);

@@ -13,13 +13,6 @@
         android:layout_above="@id/bottom_navigation_admin">
     </FrameLayout>
 
-<!--    <Button-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Logout"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:id="@+id/btn_logoutAdmin"/>-->
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -19,8 +19,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_detail_profile_image_verif"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginVertical="40dp"
                 android:layout_centerHorizontal="true"
                 android:elevation="2dp"
@@ -31,68 +31,160 @@
                 app:civ_circle_background_color="@android:color/darker_gray" >
             </de.hdodenhof.circleimageview.CircleImageView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama :"
-                android:textColor="@android:color/black"
-                android:textSize="16dp"/>
-
-            <TextView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="I Kadek Yoga Darma Putra"
-                android:layout_marginTop="4dp"
-                android:textSize="16dp"
-                android:id="@+id/tv_nama_detail_verif"/>
+                android:layout_below="@id/bagianprofile"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="6dp"
+                app:cardCornerRadius="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nomor Telephone :"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/black"
-                android:textSize="16dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="081338632506"
-                android:textSize="16dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/tv_no_detail_verif"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kota :"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/black"
-                android:textSize="16dp"/>
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:background="#FAFAFA"
+                        android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Malang"
-                android:textSize="16dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/tv_kota_detail_verif"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_person_black_24dp"
+                            android:tint="@color/colorPrimaryDark" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email :"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/black"
-                android:textSize="16dp"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_phone_black_24dp"
+                            android:tint="@color/colorPrimaryDark" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="kadekyoga@gmail.com"
-                android:textSize="16dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/tv_email_detail_verif"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:src="@drawable/home"
+                            android:tint="@color/colorPrimaryDark" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_email_black_24dp"
+                            android:tint="@color/colorPrimaryDark" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama :"
+                            android:textColor="@android:color/black"
+                            android:textSize="16dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="I Kadek Yoga Darma Putra"
+                            android:layout_marginTop="4dp"
+                            android:textSize="16dp"
+                            android:id="@+id/tv_nama_detail_verif"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nomor Telephone :"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="16dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="081338632506"
+                            android:textSize="16dp"
+                            android:layout_marginTop="4dp"
+                            android:id="@+id/tv_no_detail_verif"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kota :"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="16dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="Malang"
+                            android:textSize="16dp"
+                            android:layout_marginTop="4dp"
+                            android:id="@+id/tv_kota_detail_verif"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Email :"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="16dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="kadekyoga@gmail.com"
+                            android:textSize="16dp"
+                            android:layout_marginTop="4dp"
+                            android:id="@+id/tv_email_detail_verif"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,8 +218,8 @@
             android:layout_weight="1"
             android:text="Tolak"
             android:id="@+id/btn_tolak"
-            android:background="@android:color/holo_red_dark"
-            android:textColor="@android:color/white"/>
+            android:background="@drawable/btnwhiteborder"
+            android:textColor="@color/colorPrimaryDark" />
 
         <Button
             android:layout_width="match_parent"
@@ -135,7 +227,7 @@
             android:layout_weight="1"
             android:text="Terima"
             android:id="@+id/btn_terima"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/btnorange"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

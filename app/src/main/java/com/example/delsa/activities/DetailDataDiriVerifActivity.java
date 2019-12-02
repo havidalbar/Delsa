@@ -49,6 +49,21 @@ public class DetailDataDiriVerifActivity extends AppCompatActivity {
         String email = getIntent().getStringExtra(EMAIL);
         String foto = getIntent().getStringExtra(FOTO_ID);
 
+        tvNama = findViewById(R.id.tv_nama_detail_verif);
+        tvNo = findViewById(R.id.tv_no_detail_verif);
+        tvKota = findViewById(R.id.tv_kota_detail_verif);
+        tvEmail = findViewById(R.id.tv_email_detail_verif);
+        imgFotoId = findViewById(R.id.img_fotoId_detail_verif);
+
+//        Toast.makeText(this, foto, Toast.LENGTH_SHORT).show();
+
+        tvNama.setText(nama);
+        tvNo.setText(noTelp);
+        tvKota.setText(kota);
+        tvEmail.setText(email);
+
+        Picasso.get().load(foto).into(imgFotoId);
+
         konfirmasiRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         btnAccept = findViewById(R.id.btn_terima);
@@ -87,20 +102,7 @@ public class DetailDataDiriVerifActivity extends AppCompatActivity {
             }
         });
 
-        tvNama = findViewById(R.id.tv_nama_detail_verif);
-        tvNo = findViewById(R.id.tv_no_detail_verif);
-        tvKota = findViewById(R.id.tv_kota_detail_verif);
-        tvEmail = findViewById(R.id.tv_email_detail_verif);
-        imgFotoId = findViewById(R.id.img_fotoId_detail_verif);
 
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-
-        tvNama.setText(nama);
-        tvNo.setText(noTelp);
-        tvKota.setText(kota);
-        tvEmail.setText(email);
-
-        Picasso.get().load(foto).into(imgFotoId);
 
     }
 

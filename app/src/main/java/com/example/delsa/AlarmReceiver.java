@@ -1,5 +1,6 @@
 package com.example.delsa;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,25 +11,72 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.delsa.POJO.Bencana;
 import com.example.delsa.POJO.User;
 import com.example.delsa.activities.MenuAdminActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-import static com.example.delsa.activities.MenuAdminActivity.EXTRA_MESSAGE;
+import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver {
-    private int notifId;
+
+    public static final String TYPE_NEWUSER = "NewUser";
+    public static final String TYPE_NEWBENCANA = "NewBencana";
+    private static final String EXTRA_TYPE = "type";
+
+
+    private final static int ID_NEWUSER = 100;
+    private final static int ID_NEWBENCANA = 101;
+
+    private int idNotifUser;
+    private int idNotifBencana;
+
     @Override
     public void onReceive(final Context context, Intent intent) {
-        notifId = 1;
-        ArrayList<User> listuser = intent.getParcelableArrayListExtra(EXTRA_MESSAGE);
-        for (User user: listuser) {
-            showAlarmNotification(context, user.getNama(), "Ada user yang belum diverifikasi", notifId++);
+        idNotifUser = 1;
+        idNotifBencana = 2;
+        String type = intent.getStringExtra(EXTRA_TYPE);
+        if (type.equalsIgnoreCase(TYPE_NEWUSER)) {
+            checkNewUsers(new NotifikasiCallback() {
+                @Override
+                public void onSuccess(int newUser) {
+                    if (newUser != 0) {
+                        showAlarmNotification(context, "User Baru", "Ada " + newUser + " user yang belum diverifikasi", idNotifUser);
+                    }
+                }
+
+                @Override
+                public void onError(boolean failure) {
+
+                }
+            });
+        } else if (type.equalsIgnoreCase(TYPE_NEWBENCANA)) {
+            checkNewBencana(new NotifikasiCallback() {
+                @Override
+                public void onSuccess(int newUser) {
+                    int newBencana = newUser;
+                    if (newBencana != 0) {
+                        showAlarmNotification(context, "Bencana Baru", "Ada " + newBencana + " bencana yang belum diverifikasi", idNotifBencana);
+                    }
+                }
+
+                @Override
+                public void onError(boolean failure) {
+
+                }
+            });
         }
     }
 
@@ -36,8 +84,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String CHANNEL_ID = "Channel_1";
         String CHANNEL_NAME = "AlarmManager channel";
 
-        Intent intent;
-        intent = new Intent(context.getApplicationContext(), MenuAdminActivity.class);
+        Intent intent = new Intent(context.getApplicationContext(), MenuAdminActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -72,6 +119,75 @@ public class AlarmReceiver extends BroadcastReceiver {
             notificationManagerCompat.notify(notifId, notification);
         }
 
+    }
+
+    public void setNewUsersAndBencanaAlarm(Context context, String type) {
+        Log.d("cek", "masuk setrepeating" + type);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra(EXTRA_TYPE, type);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_NEWUSER, intent, 0);
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1 * 60 * 1000, pendingIntent);
+        }
+        Toast.makeText(context, "Reminder notif on", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void checkNewUsers(final NotifikasiCallback notifikasiCallback) {
+        Log.d("cek", "masuk checknewusers");
+        DatabaseReference sewaRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        sewaRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int newUser = 0;
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    if (!dt.child("status").getValue().toString().equalsIgnoreCase("")) {
+                        User mUser = dt.getValue(User.class);
+                        if (!mUser.isStatus()) {
+                            newUser++;
+                        }
+                    }
+                }
+                notifikasiCallback.onSuccess(newUser);
+                notifikasiCallback.onError(false);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void checkNewBencana(final NotifikasiCallback notifikasiCallback) {
+        Log.d("cek", "masuk checknewbencana");
+        DatabaseReference sewaRef = FirebaseDatabase.getInstance().getReference().child("Bencana");
+        sewaRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int newBencana = 0;
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    Bencana mBencana = dt.getValue(Bencana.class);
+                    if (!mBencana.isStatus()) {
+                        newBencana++;
+                    }
+                }
+                notifikasiCallback.onSuccess(newBencana);
+                notifikasiCallback.onError(false);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

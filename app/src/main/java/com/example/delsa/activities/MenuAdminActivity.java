@@ -4,18 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.delsa.AlarmReceiver;
-import com.example.delsa.POJO.User;
+
 import com.example.delsa.R;
 import com.example.delsa.fragment.BencanaVerifFragment;
 import com.example.delsa.fragment.DataDiriVerifFragment;
@@ -23,21 +16,11 @@ import com.example.delsa.fragment.ProfilFragment;
 import com.example.delsa.fragment.ProgresBencanaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MenuAdminActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
-    public static final String EXTRA_MESSAGE = "message";
-    public static final String EXTRA_HOUR = "hour";
-    private final static int ID_REMINDER = 100;
+    private AlarmReceiver alarmReceiver;
+    private AlarmReceiver alarmReceiverBencana;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -88,43 +71,10 @@ public class MenuAdminActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         setTitle("Data diri");
 
-        auth = FirebaseAuth.getInstance();
+        alarmReceiver = new AlarmReceiver();
+        alarmReceiverBencana = new AlarmReceiver();
+        alarmReceiver.setNewUsersAndBencanaAlarm(this, AlarmReceiver.TYPE_NEWUSER);
+        alarmReceiverBencana.setNewUsersAndBencanaAlarm(this,AlarmReceiver.TYPE_NEWBENCANA);
 
-        DatabaseReference sewaRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        sewaRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<User> listuser = new ArrayList<>();
-                for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                    User mUser = dt.getValue(User.class);
-                    if (!mUser.isStatus()) {
-                        listuser.add(mUser);
-                    }
-                }
-                showalarm(listuser);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void showalarm(ArrayList<User> listuser) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-
-        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        intent.putExtra(EXTRA_MESSAGE, listuser);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), ID_REMINDER, intent, 0);
-        if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    60 * 60 * 1000, pendingIntent);
-        }
     }
 }

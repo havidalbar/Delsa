@@ -17,6 +17,7 @@ import com.example.delsa.POJO.Bencana;
 import com.example.delsa.POJO.User;
 import com.example.delsa.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +34,7 @@ import static android.content.ContentValues.TAG;
 public class DetailBencanaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_donasiSekarang, btn_back;
-    private TextView tv_judulbencana, tv_alamatbencana, tv_deskripsibencana, tv_namaprofil;
+    private TextView tv_judulbencana, tv_alamatbencana, tv_deskripsibencana, tv_namaprofil,tv_status_bencana;
     private ImageView iv_fotobencana;
     private Bencana bencana;
     private CircleImageView civ_fotoprofil;
@@ -48,6 +49,7 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
         tv_judulbencana = findViewById(R.id.tv_judulbencana);
         tv_alamatbencana = findViewById(R.id.tv_alamatbencana);
         tv_deskripsibencana = findViewById(R.id.tv_deskripsibencana);
+        tv_status_bencana = findViewById(R.id.tv_status_bencana);
         iv_fotobencana = findViewById(R.id.iv_fotobencana);
         tv_namaprofil = findViewById(R.id.tv_namaprofil);
         civ_fotoprofil = findViewById(R.id.civ_profilimage);
@@ -65,6 +67,31 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
         tv_judulbencana.setText(bencana.getJudul());
         tv_alamatbencana.setText(bencana.getAlamat());
         tv_deskripsibencana.setText(bencana.getDeskripsi());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();
+
+        DatabaseReference userInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        userInfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.child("status").getValue().toString();
+                if(!Boolean.valueOf(status)){
+                    View btn_donasi = findViewById(R.id.btn_donasiSekarang);
+                    btn_donasi.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        if(bencana.isStatus()){
+            tv_status_bencana.setText("Terverifikasi");
+        }else{
+            tv_status_bencana.setText("Belum Terverifikasi");
+        }
         Glide.with(this).load(bencana.getFotoBencana()).into(iv_fotobencana);
     }
 

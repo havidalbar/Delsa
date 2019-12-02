@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         btn_banjir = view.findViewById(R.id.btn_banjir);
         btn_gempa = view.findViewById(R.id.btn_gempa);
         btn_others = view.findViewById(R.id.btn_others);
-        btn_lihatsemuabencana = view.findViewById(R.id.btn_lihatsemuabencanaterdekat);
+//        btn_lihatsemuabencana = view.findViewById(R.id.btn_lihatsemuabencanaterdekat);
         btn_kebakaran.setOnClickListener(this);
         btn_longsor.setOnClickListener(this);
         btn_banjir.setOnClickListener(this);
@@ -194,8 +194,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getContext(), SearchActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btn_lihatsemuabencanaterdekat:
-                break;
+//            case R.id.btn_lihatsemuabencanaterdekat:
+//                break;
             case R.id.btn_close:
                 llkategori.setVisibility(View.INVISIBLE);
                 break;

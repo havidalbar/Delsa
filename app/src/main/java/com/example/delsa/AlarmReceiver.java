@@ -163,7 +163,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     String kota = dataSnapshot.child("kota").getValue().toString();
-                                    if(kota.equalsIgnoreCase(mUser.getKota())){
+                                    String fotoIdentitas = dataSnapshot.child("fotoIdentitas").getValue().toString();
+                                    if(kota.equalsIgnoreCase(mUser.getKota()) && !fotoIdentitas.equals("")){
                                         newUser++;
                                     }
                                     notifikasiCallback.onSuccess(newUser);

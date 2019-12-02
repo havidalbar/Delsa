@@ -40,12 +40,12 @@ public class MainUserActivity extends AppCompatActivity {
                     fragmentTransaction.commit();
                     setTitle("Tambah");
                     return true;
-                case R.id.notifikasibutton:
-                    NotifikasiFragment notifikasiFragment = new NotifikasiFragment();
-                    fragmentTransaction.replace(R.id.main_frame, notifikasiFragment, "Notifikasi Fragment");
-                    fragmentTransaction.commit();
-                    setTitle("Notifikasi");
-                    return true;
+//                case R.id.notifikasibutton:
+//                    NotifikasiFragment notifikasiFragment = new NotifikasiFragment();
+//                    fragmentTransaction.replace(R.id.main_frame, notifikasiFragment, "Notifikasi Fragment");
+//                    fragmentTransaction.commit();
+//                    setTitle("Notifikasi");
+//                    return true;
                 case R.id.profilebutton:
                     ProfilFragment profilFragment = new ProfilFragment();
                     fragmentTransaction.replace(R.id.main_frame, profilFragment, "Profil Fragment");

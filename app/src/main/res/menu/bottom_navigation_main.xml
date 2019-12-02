@@ -23,13 +23,13 @@
         android:iconTint="@android:color/darker_gray"
         android:title="Tambah"
         app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/notifikasibutton"
-        android:enabled="true"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:iconTint="@android:color/darker_gray"
-        android:title="Notifikasi"
-        app:showAsAction="ifRoom"/>
+<!--    <item-->
+<!--        android:id="@+id/notifikasibutton"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_notifications_black_24dp"-->
+<!--        android:iconTint="@android:color/darker_gray"-->
+<!--        android:title="Notifikasi"-->
+<!--        app:showAsAction="ifRoom"/>-->
     <item
         android:id="@+id/profilebutton"
         android:enabled="true"

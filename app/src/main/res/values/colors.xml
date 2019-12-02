@@ -9,4 +9,5 @@
     <color name="description">#1a1a1a</color>
     <color name="chef">#777</color>
     <color name="timestamp">#777</color>
+    <color name="gray">#c5c5c5</color>
 </resources>

@@ -241,23 +241,23 @@
                 android:layout_marginTop="16dp"
                 android:background="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/tv_namadonatur"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/nama_donatur"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_namadonatur"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/nama_donatur"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/tv_emaildonatur"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/email_donatur"
-                android:textSize="16sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_emaildonatur"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:text="@string/email_donatur"-->
+<!--                android:textSize="16sp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"

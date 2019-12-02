@@ -141,7 +141,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (alarmManager != null) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1 * 60 * 1000, pendingIntent);
         }
-        Toast.makeText(context, "Reminder notif on", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -154,7 +153,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     if (!dt.child("status").getValue().toString().equalsIgnoreCase("")) {
                         final User mUser = dt.getValue(User.class);
-                        if (!mUser.isStatus()) {
+                        if (!mUser.isStatus() && !mUser.getFotoIdentitas().equals("")) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String id = user.getUid();
 

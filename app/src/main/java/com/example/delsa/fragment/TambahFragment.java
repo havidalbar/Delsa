@@ -87,6 +87,8 @@ public class TambahFragment extends Fragment implements View.OnClickListener {
         btnTambahBencana.setOnClickListener(this);
         ivFotoBencana.setOnClickListener(this);
 
+        if (btnTambahBencana.getVisibility() == View.VISIBLE)
+
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         accountReference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getUid());

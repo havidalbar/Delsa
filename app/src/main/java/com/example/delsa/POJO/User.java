@@ -21,46 +21,6 @@ public class User implements Parcelable {
         this.status = status;
     }
 
-    protected User(Parcel in) {
-        uid = in.readString();
-        nama = in.readString();
-        noTelephone = in.readString();
-        kota = in.readString();
-        email = in.readString();
-        fotoIdentitas = in.readString();
-        fotoProfil = in.readString();
-        status = in.readByte() != 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(uid);
-        dest.writeString(nama);
-        dest.writeString(noTelephone);
-        dest.writeString(kota);
-        dest.writeString(email);
-        dest.writeString(fotoIdentitas);
-        dest.writeString(fotoProfil);
-        dest.writeByte((byte) (status ? 1 : 0));
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
     public String getUid() {
         return uid;
     }
@@ -93,5 +53,80 @@ public class User implements Parcelable {
         return status;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setNoTelephone(String noTelephone) {
+        this.noTelephone = noTelephone;
+    }
+
+    public void setKota(String kota) {
+        this.kota = kota;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFotoIdentitas(String fotoIdentitas) {
+        this.fotoIdentitas = fotoIdentitas;
+    }
+
+    public void setFotoProfil(String fotoProfil) {
+        this.fotoProfil = fotoProfil;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public static Creator<User> getCREATOR() {
+        return CREATOR;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.uid);
+        dest.writeString(this.nama);
+        dest.writeString(this.noTelephone);
+        dest.writeString(this.kota);
+        dest.writeString(this.email);
+        dest.writeString(this.fotoIdentitas);
+        dest.writeString(this.fotoProfil);
+        dest.writeByte(this.status ? (byte) 1 : (byte) 0);
+    }
+
+    protected User(Parcel in) {
+        this.uid = in.readString();
+        this.nama = in.readString();
+        this.noTelephone = in.readString();
+        this.kota = in.readString();
+        this.email = in.readString();
+        this.fotoIdentitas = in.readString();
+        this.fotoProfil = in.readString();
+        this.status = in.readByte() != 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_add_donasipakaian"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_add_black_24dp"
+            android:backgroundTint="@android:color/white" />
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>
+

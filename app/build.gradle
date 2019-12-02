@@ -57,5 +57,6 @@ dependencies {
 
     //image popup
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
+
 }
 apply plugin: 'com.google.gms.google-services'

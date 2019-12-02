@@ -6,15 +6,21 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.example.delsa.AlarmReceiver;
+
 import com.example.delsa.R;
 import com.example.delsa.fragment.BencanaVerifFragment;
 import com.example.delsa.fragment.DataDiriVerifFragment;
 import com.example.delsa.fragment.ProfilFragment;
 import com.example.delsa.fragment.ProgresBencanaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuAdminActivity extends AppCompatActivity {
 
+    private AlarmReceiver alarmReceiver;
+    private AlarmReceiver alarmReceiverBencana;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -64,6 +70,11 @@ public class MenuAdminActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_frame_admin, dataDiriVerifFragment, "Data Diri Verif Fragment");
         fragmentTransaction.commit();
         setTitle("Data diri");
+
+        alarmReceiver = new AlarmReceiver();
+        alarmReceiverBencana = new AlarmReceiver();
+        alarmReceiver.setNewUsersAndBencanaAlarm(this, AlarmReceiver.TYPE_NEWUSER);
+        alarmReceiverBencana.setNewUsersAndBencanaAlarm(this,AlarmReceiver.TYPE_NEWBENCANA);
 
     }
 }

@@ -9,18 +9,44 @@
 
     <include
         android:id="@+id/toolbar_donasi_pakaian"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar_donasipakaian" />
 
     <ScrollView
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_donasi_pakaian">
+
+        <LinearLayout
+            android:id="@+id/ll_add_donasipakaian"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include android:id="@+id/item_donasi_1" layout="@layout/item_donasi_pakaian"/>
+            <include android:id="@+id/item_donasi_2" layout="@layout/item_donasi_pakaian" android:visibility="gone"/>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:text="Lanjutkan"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@drawable/button_round_corner"
+                android:layout_margin="16dp"/>
+
+        </LinearLayout>
 
 
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/ll_tidakadaform"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -53,17 +79,5 @@
     </LinearLayout>
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:text="Lanjutkan"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="@drawable/button_round_corner"
-        android:layout_margin="16dp"/>
 
 </RelativeLayout>

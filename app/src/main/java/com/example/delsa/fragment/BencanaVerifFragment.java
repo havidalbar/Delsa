@@ -104,6 +104,7 @@ public class BencanaVerifFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
         
         return view;

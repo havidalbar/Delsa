@@ -16,7 +16,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        toolbar = findViewById(R.id.toolbar_donasi_uang);
+        toolbar = findViewById(R.id.toolbar_editprofil);
         toolbar.setTitle("Edit Profil");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

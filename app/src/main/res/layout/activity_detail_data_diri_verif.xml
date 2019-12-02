@@ -199,6 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
                 android:id="@+id/img_fotoId_detail_verif"/>
 
         </LinearLayout>
@@ -218,7 +219,7 @@
             android:layout_weight="1"
             android:text="Tolak"
             android:id="@+id/btn_tolak"
-            android:background="@drawable/btnwhiteborder"
+            android:background="@android:color/white"
             android:textColor="@color/colorPrimaryDark" />
 
         <Button
@@ -227,7 +228,7 @@
             android:layout_weight="1"
             android:text="Terima"
             android:id="@+id/btn_terima"
-            android:background="@drawable/btnorange"
+            android:background="@color/colorPrimary"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

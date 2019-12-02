@@ -41,14 +41,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:id="@+id/tv_progres_nama_user_bencana"
                     tools:text="Bambang"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="6dp"
                     android:id="@+id/tv_deskripsi_progres_bencana"
                     android:maxLines="2"
                     android:ellipsize="end"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/iv_fotobencana"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/placeholder_bg" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/tv_judulbencana"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/placeholder_bg"
+            android:textColor="@android:color/black" />
+
+        <View
+            android:id="@+id/tv_name_user"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/placeholder_bg" />
+
+        <View
+            android:id="@+id/tv_deskripsibencana"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/placeholder_bg" />
+    </LinearLayout>
+</LinearLayout>

@@ -58,5 +58,8 @@ dependencies {
     //image popup
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
 
+    //shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 }
 apply plugin: 'com.google.gms.google-services'

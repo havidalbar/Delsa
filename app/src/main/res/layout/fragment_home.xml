@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -117,8 +118,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <Button
@@ -189,28 +190,28 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
-<!--                <LinearLayout-->
-<!--                    android:paddingHorizontal="16dp"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal">-->
+                <!--                <LinearLayout-->
+                <!--                    android:paddingHorizontal="16dp"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Bencana Terdekat"
-                        android:layout_marginHorizontal="16dp"
-                        android:textColor="@android:color/black"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_weight="1"
+                    android:text="Bencana Terdekat"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
-<!--                    <Button-->
-<!--                        android:id="@+id/btn_refreshlocation"-->
-<!--                        android:layout_width="30dp"-->
-<!--                        android:background="@drawable/ic_refresh_black_24dp"-->
-<!--                        android:layout_height="30dp" />-->
-<!--                </LinearLayout>-->
+                <!--                    <Button-->
+                <!--                        android:id="@+id/btn_refreshlocation"-->
+                <!--                        android:layout_width="30dp"-->
+                <!--                        android:background="@drawable/ic_refresh_black_24dp"-->
+                <!--                        android:layout_height="30dp" />-->
+                <!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,11 +244,34 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    shimmer:duration="800">
+
+                    <!-- Adding 3 rows of placeholders -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <include layout="@layout/bencana_placeholder_item" />
+
+                        <include layout="@layout/bencana_placeholder_item" />
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_bencanaterdekat"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginTop="8dp"
+                    android:visibility="gone"
                     tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     tools:listitem="@layout/item_bencana"
                     tools:orientation="horizontal"
@@ -268,12 +292,40 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    shimmer:duration="800">
+
+                    <!-- Adding 3 rows of placeholders -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/bencana_placeholder_item_horizontal" />
+
+                        <include layout="@layout/bencana_placeholder_item_horizontal" />
+
+                        <include layout="@layout/bencana_placeholder_item_horizontal" />
+
+                        <include layout="@layout/bencana_placeholder_item_horizontal" />
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_caripahalayuk"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_bencana_horizontal"
                     android:layout_marginBottom="16dp"
+                    tools:listitem="@layout/item_bencana_horizontal"
                     tools:orientation="horizontal"
                     tools:scrollbars="horizontal" />
             </LinearLayout>

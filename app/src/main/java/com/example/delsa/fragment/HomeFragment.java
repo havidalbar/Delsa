@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import com.example.delsa.R;
 import com.example.delsa.activities.SearchActivity;
 import com.example.delsa.adapter.AdapterBencana;
 import com.example.delsa.adapter.AdapterBencanaTerdekat;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,22 +59,39 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private LinearLayout llkategori;
     private ImageView iv_close;
     private LinearLayout ll_kebakaran, ll_longsor, ll_banjir, ll_gempabumi, ll_tsunami, ll_gunungmeletus, ll_putingbeliung;
-
 //    private LocationListener locationListener;
 
     static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private String kotaSekarang;
 
+    private ShimmerFrameLayout mShimmerViewContainer;
+    private ShimmerFrameLayout mShimmerViewContainer2;
+
     public HomeFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onStart() {
+        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer2.startShimmerAnimation();
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer2.startShimmerAnimation();
+        super.onResume();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+        mShimmerViewContainer2 = view.findViewById(R.id.shimmer_view_container2);
 
         btn_kebakaran = view.findViewById(R.id.btn_kebakaran);
         btn_longsor = view.findViewById(R.id.btn_longsor);
@@ -135,6 +154,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
 
                 }
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
+                rv_bencanaterdekat.setVisibility(View.VISIBLE);
                 AdapterBencanaTerdekat adapterBencanaTerdekat = new AdapterBencanaTerdekat(getContext());
                 adapterBencanaTerdekat.setData(bencanaterdekat);
                 rv_bencanaterdekat.setAdapter(adapterBencanaTerdekat);
@@ -159,6 +181,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     Bencana bencana = dt.getValue(Bencana.class);
                     list_bencana.add(bencana);
                 }
+
+                mShimmerViewContainer2.stopShimmerAnimation();
+                mShimmerViewContainer2.setVisibility(View.GONE);
+                rv_caripahalayuk.setVisibility(View.VISIBLE);
                 AdapterBencana adapterBencana = new AdapterBencana(getContext());
                 adapterBencana.setData(list_bencana);
                 rv_caripahalayuk.setAdapter(adapterBencana);

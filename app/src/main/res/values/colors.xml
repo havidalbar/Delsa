@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#FB9644</color>
     <color name="colorAccent">#61C9FF</color>
     <color name="Transparent">#00000000</color>
+    <color name="placeholder_bg">#dddddd</color>
+    <color name="item_name">#0c0c0c</color>
+    <color name="description">#1a1a1a</color>
+    <color name="chef">#777</color>
+    <color name="timestamp">#777</color>
 </resources>

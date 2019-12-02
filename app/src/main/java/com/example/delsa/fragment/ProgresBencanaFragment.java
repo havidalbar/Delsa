@@ -72,7 +72,6 @@ public class ProgresBencanaFragment extends Fragment {
                             if (a.isStatus() && a.getKota().equalsIgnoreCase(kota) && a.getStatusPengiriman().equalsIgnoreCase("Masih dikumpulkan") ){
                                 list_bencana2.add(a);
                             }
-
                         }
 
                         AdapterProgresBencana adapterProgresBencana = new AdapterProgresBencana(getContext());

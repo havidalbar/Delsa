@@ -228,7 +228,7 @@
             android:layout_weight="1"
             android:text="Terima"
             android:id="@+id/btn_terima"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

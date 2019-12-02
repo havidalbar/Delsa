@@ -102,7 +102,6 @@ public class RiwayatBarangFragment extends Fragment {
                                 }
                             }
                         }
-                        Toast.makeText(getActivity(), String.valueOf(listbencana.size()), Toast.LENGTH_SHORT).show();
                         AdapterRiwayat adapterRiwayat = new AdapterRiwayat(getContext());
                         adapterRiwayat.setData(listbencana);
                         rcvDonasiBarang.setAdapter(adapterRiwayat);

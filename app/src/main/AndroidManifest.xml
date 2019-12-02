@@ -18,46 +18,82 @@
         android:roundIcon="@mipmap/delsa"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PenjemputanBarangActivity" android:parentActivityName=".activities.DonasiPakaianActivity" />
-        <activity android:name=".activities.DetailBencanaVerifActivity" />
-        <activity android:name=".activities.ProgresBencanaActivity" />
+        <activity android:name=".activities.PenjemputanBarangActivity"
+            android:parentActivityName=".activities.DonasiPakaianActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.DetailBencanaVerifActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ProgresBencanaActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.KategoriActivity"
-            android:parentActivityName=".activities.MainUserActivity" />
-        <activity android:name=".activities.DetailDataDiriVerifActivity" />
+            android:parentActivityName=".activities.MainUserActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.DetailDataDiriVerifActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.EditProfileActivity"
-            android:parentActivityName=".activities.MainUserActivity" />
+            android:parentActivityName=".activities.MainUserActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.PembayaranActivity"
-            android:parentActivityName=".activities.DonasiUangActivity" />
-        <activity android:name=".activities.SlideScreenActivity">
+            android:parentActivityName=".activities.DonasiUangActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.SlideScreenActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.SearchActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.DonasiUangActivity"
-            android:parentActivityName=".activities.KategoriDonasiActivity" />
+            android:parentActivityName=".activities.KategoriDonasiActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.DonasiPakaianActivity"
-            android:parentActivityName=".activities.KategoriDonasiActivity" />
+            android:parentActivityName=".activities.KategoriDonasiActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.KategoriDonasiActivity"
-            android:parentActivityName=".activities.DetailBencanaActivity" />
-        <activity android:name=".activities.DetailBencanaActivity" />
-        <activity android:name=".activities.MainUserActivity" />
-        <activity android:name=".activities.BuktiDataDiriActivity" />
-        <activity android:name=".activities.MenuAdminActivity" />
-        <activity android:name=".activities.MenuActivity" />
-        <activity android:name=".activities.MainActivity" />
+            android:parentActivityName=".activities.DetailBencanaActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.DetailBencanaActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MainUserActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.BuktiDataDiriActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MenuAdminActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MenuActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-
         <receiver android:name=".AlarmReceiver" />
     </application>
 

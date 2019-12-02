@@ -6,48 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".activities.SlideScreenActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bgcircles" />
+   <androidx.viewpager.widget.ViewPager
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/slideViewPager"
+       android:layout_above="@+id/dot_layout">
 
-    <Button
-        android:id="@+id/skipbutton"
+   </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@color/Transparent"
-        android:text="Skip"
-        android:textAllCaps="false"
-        android:layout_margin="16dp"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18dp" />
-
-    <ViewFlipper
-        android:layout_above="@id/nextbutton"
-        android:layout_below="@id/skipbutton"
-        android:id="@+id/slideshowphoto"
-        android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingHorizontal="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp" />
-
-    <Button
-        android:id="@+id/nextbutton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="58dp"
-        android:background="@drawable/btnorange"
-        android:gravity="center"
-        android:text="Lanjutkan"
+        android:id="@+id/dot_layout">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="4dp"
+        android:text="Sebelumnya"
+        android:textColor="@color/colorPrimaryDark"
         android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:background="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="4dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Selanjutnya"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"/>
 
 </RelativeLayout>

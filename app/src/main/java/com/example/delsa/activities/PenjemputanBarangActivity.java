@@ -207,8 +207,11 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String key = FirebaseDatabase.getInstance().getReference().child("Donasi Barang").push().getKey();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi Barang").child(key);
+//    public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String koordinat, String alamat, String jumlah, String deskripsi, String foto, String tgldonasi) {
 
-        DonasiBarang donasiBarang = new DonasiBarang(key,auth.getUid(),bencana.getIdbencana(),kategori,jumlah,deskripsi,url_photo,getTodayDate(),et_ket_lokasi.getText().toString(),sw_anonim.isChecked());
+        String koordinat ="kordinatnya";
+        String alamat = et_ket_lokasi.getText().toString();
+        DonasiBarang donasiBarang = new DonasiBarang(key,auth.getUid(),bencana.getIdbencana(),kategori,koordinat, alamat, jumlah,deskripsi,url_photo,getTodayDate(),sw_anonim.isChecked());
         myRef.setValue(donasiBarang);
         PD.dismiss();
         Intent intent = new Intent(PenjemputanBarangActivity.this, MainUserActivity.class);

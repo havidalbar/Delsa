@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.POJO.User;
 import com.example.delsa.activities.MenuAdminActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +44,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     private int idNotifUser;
     private int idNotifBencana;
+    private int newUser = 0;
+    private int newBencana = 0;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -62,7 +66,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
                 }
             });
-        } else if (type.equalsIgnoreCase(TYPE_NEWBENCANA)) {
+        } if (type.equalsIgnoreCase(TYPE_NEWBENCANA)) {
+            Log.d("cek", "masuk typebencana" + type);
             checkNewBencana(new NotifikasiCallback() {
                 @Override
                 public void onSuccess(int newUser) {
@@ -146,17 +151,34 @@ public class AlarmReceiver extends BroadcastReceiver {
         sewaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int newUser = 0;
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     if (!dt.child("status").getValue().toString().equalsIgnoreCase("")) {
-                        User mUser = dt.getValue(User.class);
+                        final User mUser = dt.getValue(User.class);
                         if (!mUser.isStatus()) {
-                            newUser++;
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String id = user.getUid();
+
+                            DatabaseReference adminInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+                            adminInfo.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String kota = dataSnapshot.child("kota").getValue().toString();
+                                    if(kota.equalsIgnoreCase(mUser.getKota())){
+                                        newUser++;
+                                    }
+                                    notifikasiCallback.onSuccess(newUser);
+                                    notifikasiCallback.onError(false);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
+                        newUser = 0;
                     }
                 }
-                notifikasiCallback.onSuccess(newUser);
-                notifikasiCallback.onError(false);
             }
 
             @Override
@@ -172,7 +194,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         sewaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int newBencana = 0;
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Bencana mBencana = dt.getValue(Bencana.class);
                     if (!mBencana.isStatus()) {

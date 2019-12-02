@@ -33,7 +33,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kamimampu.com | 15 hari tersisa" />
+            android:id="@+id/tv_name_user"
+            android:text="Bambang" />
 
         <TextView
             android:id="@+id/tv_deskripsibencana"

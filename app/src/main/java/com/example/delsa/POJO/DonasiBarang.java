@@ -5,22 +5,20 @@ import android.os.Parcelable;
 
 public class DonasiBarang implements Parcelable {
 
-    private String idDonasi, idUser, idBencana, kategori, jumlah, deskripsi, foto, tgldonasi, ketlokasi;
+    private String idDonasi, idUser, idBencana, kategori, koordinat, alamat, jumlah, deskripsi, foto, tgldonasi;
     private boolean anonim;
 
-    public DonasiBarang() {
-    }
-
-    public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String jumlah, String deskripsi, String foto, String tgldonasi, String ketlokasi, boolean anonim) {
+    public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String koordinat, String alamat, String jumlah, String deskripsi, String foto, String tgldonasi, boolean anonim) {
         this.idDonasi = idDonasi;
         this.idUser = idUser;
         this.idBencana = idBencana;
         this.kategori = kategori;
+        this.koordinat = koordinat;
+        this.alamat = alamat;
         this.jumlah = jumlah;
         this.deskripsi = deskripsi;
         this.foto = foto;
         this.tgldonasi = tgldonasi;
-        this.ketlokasi = ketlokasi;
         this.anonim = anonim;
     }
 
@@ -40,6 +38,14 @@ public class DonasiBarang implements Parcelable {
         return kategori;
     }
 
+    public String getKoordinat() {
+        return koordinat;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
     public String getJumlah() {
         return jumlah;
     }
@@ -56,10 +62,6 @@ public class DonasiBarang implements Parcelable {
         return tgldonasi;
     }
 
-    public String getKetlokasi() {
-        return ketlokasi;
-    }
-
     public boolean isAnonim() {
         return anonim;
     }
@@ -73,12 +75,33 @@ public class DonasiBarang implements Parcelable {
         idUser = in.readString();
         idBencana = in.readString();
         kategori = in.readString();
+        koordinat = in.readString();
+        alamat = in.readString();
         jumlah = in.readString();
         deskripsi = in.readString();
         foto = in.readString();
         tgldonasi = in.readString();
-        ketlokasi = in.readString();
         anonim = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idDonasi);
+        dest.writeString(idUser);
+        dest.writeString(idBencana);
+        dest.writeString(kategori);
+        dest.writeString(koordinat);
+        dest.writeString(alamat);
+        dest.writeString(jumlah);
+        dest.writeString(deskripsi);
+        dest.writeString(foto);
+        dest.writeString(tgldonasi);
+        dest.writeByte((byte) (anonim ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<DonasiBarang> CREATOR = new Creator<DonasiBarang>() {
@@ -92,23 +115,4 @@ public class DonasiBarang implements Parcelable {
             return new DonasiBarang[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(idDonasi);
-        dest.writeString(idUser);
-        dest.writeString(idBencana);
-        dest.writeString(kategori);
-        dest.writeString(jumlah);
-        dest.writeString(deskripsi);
-        dest.writeString(foto);
-        dest.writeString(tgldonasi);
-        dest.writeString(ketlokasi);
-        dest.writeByte((byte) (anonim ? 1 : 0));
-    }
 }

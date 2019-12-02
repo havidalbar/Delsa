@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.POJO.User;
 import com.example.delsa.R;
@@ -93,6 +95,27 @@ public class DetailBencanaActivity extends AppCompatActivity implements View.OnC
             tv_status_bencana.setText("Belum Terverifikasi");
         }
         Glide.with(this).load(bencana.getFotoBencana()).into(iv_fotobencana);
+
+
+        final ImagePopup imagePopup = new ImagePopup(this);
+        imagePopup.setWindowHeight(800); // Optional
+        imagePopup.setWindowWidth(800); // Optional
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(true);  // Optional
+        imagePopup.setImageOnClickClose(true);  // Optional
+
+        imagePopup.initiatePopupWithGlide(bencana.getFotoBencana());
+
+        iv_fotobencana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** Initiate Popup view **/
+                imagePopup.viewPopup();
+
+            }
+        });
+
     }
 
     @Override

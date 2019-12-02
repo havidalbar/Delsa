@@ -64,26 +64,26 @@ public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView iv_fotobencana;
-        private final TextView tv_judulbencana;
-        private final TextView tv_deskripsi;
+        private final TextView tv_judulnotifikasi;
+        private final TextView tv_kategorinotifikasi;
+        private final TextView tv_waktunotifikasi;
 
         ViewHolder(View itemView) {
             super(itemView);
-            iv_fotobencana = itemView.findViewById(R.id.iv_fotobencana);
-            tv_judulbencana = itemView.findViewById(R.id.tv_judulbencana);
-            tv_deskripsi = itemView.findViewById(R.id.tv_deskripsibencana);
+            tv_judulnotifikasi = itemView.findViewById(R.id.tv_judulnotifikasi);
+            tv_kategorinotifikasi = itemView.findViewById(R.id.tv_kategorinotifikasi);
+            tv_waktunotifikasi = itemView.findViewById(R.id.tv_waktunotifikasi);
         }
 
         void bind(Bencana bencana){
-            tv_judulbencana.setText(bencana.getJudul());
-            tv_deskripsi.setText(bencana.getDeskripsi());
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));
-            Glide.with(itemView.getContext())
-                    .load(bencana.getFotoBencana())
-                    .apply(requestOptions)
-                    .into(iv_fotobencana);
+//            tv_judulbencana.setText(bencana.getJudul());
+//            tv_deskripsi.setText(bencana.getDeskripsi());
+//            RequestOptions requestOptions = new RequestOptions();
+//            requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));
+//            Glide.with(itemView.getContext())
+//                    .load(bencana.getFotoBencana())
+//                    .apply(requestOptions)
+//                    .into(iv_fotobencana);
         }
     }
 }

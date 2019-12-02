@@ -42,16 +42,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_riwayat, parent, false);
-        final ViewHolder holder = new ViewHolder(v);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(parent.getContext(), DetailBencanaActivity.class);
-                intent.putExtra("bencana", (Parcelable)list_bencana.get(holder.getAdapterPosition()));
-                parent.getContext().startActivity(intent);
-            }
-        });
-        return holder;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -67,21 +58,18 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_fotobencana;
         private final TextView tv_judulriwayat;
-        private final TextView tv_tanggalriwayat;
         private final TextView tv_statusriwayat;
 
         ViewHolder(View itemView) {
             super(itemView);
             iv_fotobencana = itemView.findViewById(R.id.iv_fotobencana);
             tv_judulriwayat = itemView.findViewById(R.id.tv_judulriwayat);
-            tv_tanggalriwayat = itemView.findViewById(R.id.tv_tanggalriwayat);
             tv_statusriwayat = itemView.findViewById(R.id.tv_statusriwayat);
         }
 
         void bind(Bencana bencana){
             tv_judulriwayat.setText(bencana.getJudul());
-            tv_tanggalriwayat.setText(bencana.getTanggalLapor());
-            String status = "";
+            String status;
             if (bencana.isStatus()){
                 status = "Masih dikumpulkan";
             } else {

@@ -192,8 +192,8 @@ public class DonasiUangActivity extends AppCompatActivity implements View.OnTouc
         int total = nominal + random;
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        key = FirebaseDatabase.getInstance().getReference().child("Donasi").child(bencana.getIdbencana()).push().getKey();
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi").child(bencana.getIdbencana()).child(key);
+        key = FirebaseDatabase.getInstance().getReference().child("Donasi").push().getKey();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi").child(key);
 
         donasi = new Donasi(key,auth.getUid(),bencana.getIdbencana(),String.valueOf(nominal),String.valueOf(random),String.valueOf(total),metode,pesan,getTomorrowDate(),anonim,false);
         myRef.setValue(donasi);

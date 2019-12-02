@@ -20,6 +20,7 @@ import com.example.delsa.R;
 import com.example.delsa.activities.DetailBencanaVerifActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,7 +52,9 @@ public class BencanaVerifFragment extends Fragment {
         rcvListBencanaVerif = view.findViewById(R.id.rcv_bencana_verif);
         rcvListBencanaVerif.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        query = FirebaseDatabase.getInstance().getReference().child("Bencana").orderByChild("status").equalTo(false);
+        String status = "false_";
+        query = FirebaseDatabase.getInstance().getReference().child("Bencana").orderByChild("status").equalTo(status);
+
 
         FirebaseRecyclerOptions<Bencana> options = new FirebaseRecyclerOptions.Builder<Bencana>()
                 .setQuery(query, Bencana.class)
@@ -62,20 +65,6 @@ public class BencanaVerifFragment extends Fragment {
             protected void onBindViewHolder(@NonNull final BencanaViewHolder holder, int position, @NonNull final Bencana model) {
                 holder.setDisplayPhoto(model.getFotoBencana());
                 holder.setDisplayNamaBencana(model.getJudul());
-                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-                userRef.child(model.getIdUser()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String namaUser = dataSnapshot.child("nama").getValue().toString();
-
-                        holder.setDisplayNamaUser(namaUser);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
                 holder.setDisplayDeskripsiBencana(model.getDeskripsi());
 
                 holder.view.setOnClickListener(new View.OnClickListener() {
@@ -108,11 +97,11 @@ public class BencanaVerifFragment extends Fragment {
                 return new BencanaViewHolder(view1);
             }
         };
-
+        firebaseRecyclerAdapter.startListening();
         rcvListBencanaVerif.setAdapter(firebaseRecyclerAdapter);
-
         return view;
     }
+
 
     @Override
     public void onStart() {
@@ -128,7 +117,7 @@ public class BencanaVerifFragment extends Fragment {
         firebaseRecyclerAdapter.stopListening();
     }
 
-    public class BencanaViewHolder extends RecyclerView.ViewHolder{
+    public class BencanaViewHolder extends RecyclerView.ViewHolder {
 
         View view;
 
@@ -138,26 +127,26 @@ public class BencanaVerifFragment extends Fragment {
             view = itemView;
         }
 
-        public void setDisplayPhoto (String foto){
+        public void setDisplayPhoto(String foto) {
             ImageView fotoBencana = view.findViewById(R.id.img_bencana_verif);
-            if(!foto.isEmpty()) {
+            if (!foto.isEmpty()) {
                 Picasso.get().load(foto).placeholder(R.drawable.person).into(fotoBencana);
             }
         }
 
-        public void setDisplayNamaBencana (String bencanaName) {
+        public void setDisplayNamaBencana(String bencanaName) {
             TextView namaBencana = view.findViewById(R.id.tv_nama_bencana_verif);
 
             namaBencana.setText(bencanaName);
         }
 
-        public void setDisplayNamaUser (String userNama) {
+        public void setDisplayNamaUser(String userNama) {
             TextView namaUser = view.findViewById(R.id.tv_nama_user_bencana_verif);
 
             namaUser.setText(userNama);
         }
 
-        public void setDisplayDeskripsiBencana(String des_bencana){
+        public void setDisplayDeskripsiBencana(String des_bencana) {
             TextView deskripsiBencana = view.findViewById(R.id.tv_deskripsi_bencana_verif);
 
             deskripsiBencana.setText(des_bencana);

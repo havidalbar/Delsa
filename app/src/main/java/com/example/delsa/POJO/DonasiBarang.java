@@ -5,16 +5,17 @@ import android.os.Parcelable;
 
 public class DonasiBarang implements Parcelable {
 
-    private String idDonasi, idUser, idBencana, kategori, koordinat, alamat, jumlah, deskripsi, foto, tgldonasi;
+    private String idDonasi, idUser, idBencana, kategori, koordinat, alamat, ketalamat, jumlah, deskripsi, foto, tgldonasi;
     private boolean anonim;
 
-    public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String koordinat, String alamat, String jumlah, String deskripsi, String foto, String tgldonasi, boolean anonim) {
+    public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String koordinat, String alamat, String ketalamat, String jumlah, String deskripsi, String foto, String tgldonasi, boolean anonim) {
         this.idDonasi = idDonasi;
         this.idUser = idUser;
         this.idBencana = idBencana;
         this.kategori = kategori;
         this.koordinat = koordinat;
         this.alamat = alamat;
+        this.ketalamat = ketalamat;
         this.jumlah = jumlah;
         this.deskripsi = deskripsi;
         this.foto = foto;
@@ -44,6 +45,10 @@ public class DonasiBarang implements Parcelable {
 
     public String getAlamat() {
         return alamat;
+    }
+
+    public String getKetalamat() {
+        return ketalamat;
     }
 
     public String getJumlah() {
@@ -77,6 +82,7 @@ public class DonasiBarang implements Parcelable {
         kategori = in.readString();
         koordinat = in.readString();
         alamat = in.readString();
+        ketalamat = in.readString();
         jumlah = in.readString();
         deskripsi = in.readString();
         foto = in.readString();
@@ -92,6 +98,7 @@ public class DonasiBarang implements Parcelable {
         dest.writeString(kategori);
         dest.writeString(koordinat);
         dest.writeString(alamat);
+        dest.writeString(ketalamat);
         dest.writeString(jumlah);
         dest.writeString(deskripsi);
         dest.writeString(foto);

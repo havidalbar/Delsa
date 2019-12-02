@@ -228,7 +228,7 @@
                         android:drawablePadding="4dp"
                         android:drawableTint="@color/colorPrimaryDark"
                         android:gravity="center_vertical"
-                        android:text="Sekarpuro, Malang, Jawa Timur" />
+                        android:text="Mencari...." />
 
                     <Button
                         android:id="@+id/btn_lihatsemuabencanaterdekat"

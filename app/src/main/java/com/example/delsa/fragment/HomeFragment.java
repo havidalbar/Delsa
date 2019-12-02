@@ -74,6 +74,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        kotaSekarang = "";
+
         btn_kebakaran = view.findViewById(R.id.btn_kebakaran);
         btn_longsor = view.findViewById(R.id.btn_longsor);
         btn_banjir = view.findViewById(R.id.btn_banjir);
@@ -129,7 +131,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ArrayList<Bencana> bencanaterdekat = new ArrayList<>();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
 
-                    if (dt.child("kota").getValue().toString().equalsIgnoreCase(kotaSekarang.split(" ")[1])){
+                    if (dt.child("kota").getValue().toString().equalsIgnoreCase(kotaSekarang.split(" ")[1])) {
                         Bencana bencana = dt.getValue(Bencana.class);
                         bencanaterdekat.add(bencana);
                     }
@@ -256,11 +258,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 //        Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
         kotaSekarang = city;
-        String currentLocation = city +  ", " + state;
+        String currentLocation = city + ", " + state;
         return currentLocation;
     }
 
-    private void getCurrentLocation(){
+    private void getCurrentLocation() {
 
         final LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -270,10 +272,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                if (location != null){
+                if (location != null) {
                     try {
                         tv_lokasi.setText(getCityAndProvince(location));
-                        getBencanaTerdekat();
+                        Log.d("cek masuk",kotaSekarang);
+
+                        if (!kotaSekarang.equals("")) {
+                            Log.d("cek masukssss",kotaSekarang);
+                            getBencanaTerdekat();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -301,13 +308,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 alertDialogBuilder
                         .setMessage("Apakah ingin menghidupkan GPS?")
                         .setCancelable(false)
-                        .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
                                 // jika tombol diklik, maka akan menutup activity ini
                                 startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                             }
                         })
-                        .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // jika tombol ini diklik, akan menutup dialog
                                 // dan tidak terjadi apa2
@@ -335,7 +342,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 50, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,5000,50, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 50, locationListener);
     }
 
 }

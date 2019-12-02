@@ -3,10 +3,21 @@ package com.example.delsa.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -34,9 +45,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import static com.example.delsa.activities.BuktiDataDiriActivity.REQUEST_IMAGE_CAPTURE;
 import static com.example.delsa.activities.KategoriDonasiActivity.EXTRA_BENCANA;
@@ -67,11 +81,16 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
     private String kategori;
     private String jumlah;
     private String deskripsi;
+    private String koordinat;
+
+    static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penjemputan_barang);
+
+        getCurrentLocation();
 
         bencana = getIntent().getParcelableExtra(EXTRA_BENCANA);
 
@@ -207,11 +226,9 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String key = FirebaseDatabase.getInstance().getReference().child("Donasi Barang").push().getKey();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Donasi Barang").child(key);
-//    public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String koordinat, String alamat, String jumlah, String deskripsi, String foto, String tgldonasi) {
 
-        String koordinat ="kordinatnya";
         String alamat = et_ket_lokasi.getText().toString();
-        DonasiBarang donasiBarang = new DonasiBarang(key,auth.getUid(),bencana.getIdbencana(),kategori,koordinat, alamat, jumlah,deskripsi,url_photo,getTodayDate(),sw_anonim.isChecked());
+        DonasiBarang donasiBarang = new DonasiBarang(key,auth.getUid(),bencana.getIdbencana(),kategori,koordinat, alamat,tv_penjemputanbarang.getText().toString(), jumlah,deskripsi,url_photo,getTodayDate(),sw_anonim.isChecked());
         myRef.setValue(donasiBarang);
         PD.dismiss();
         Intent intent = new Intent(PenjemputanBarangActivity.this, MainUserActivity.class);
@@ -228,5 +245,104 @@ public class PenjemputanBarangActivity extends AppCompatActivity implements View
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
         String formattedDate = df.format(tomorrow);
         return formattedDate;
+    }
+
+    private String getCityAndProvince(Location location) throws IOException {
+        Geocoder geocoder;
+        List<Address> addresses;
+        String city = null, state = null, knownName = null;
+        geocoder = new Geocoder(PenjemputanBarangActivity.this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            String latitude = String.valueOf(location.getLatitude());
+            String longitude = String.valueOf(location.getLongitude());
+            koordinat = latitude+", "+longitude;
+            state = addresses.get(0).getAdminArea();
+            city = addresses.get(0).getSubAdminArea();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String currentLocation = city +  ", " + state;
+        return currentLocation;
+    }
+
+    private void getCurrentLocation(){
+
+        final LocationManager locationManager = (LocationManager) PenjemputanBarangActivity.this.getSystemService(Context.LOCATION_SERVICE);
+
+//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        final String userId = currentUser.getUid();
+
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                if (location != null){
+                    try {
+                        tv_penjemputanbarang.setText(getCityAndProvince(location));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PenjemputanBarangActivity.this);
+
+                // set title dialog
+                alertDialogBuilder.setTitle("GPS mati");
+
+                // set pesan dari dialog
+                alertDialogBuilder
+                        .setMessage("Apakah ingin menghidupkan GPS?")
+                        .setCancelable(false)
+                        .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // jika tombol diklik, maka akan menutup activity ini
+                                startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                            }
+                        })
+                        .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // jika tombol ini diklik, akan menutup dialog
+                                // dan tidak terjadi apa2
+                                dialog.cancel();
+                            }
+                        });
+
+                // membuat alert dialog dari builder
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // menampilkan alert dialog
+                alertDialog.show();
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(PenjemputanBarangActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(PenjemputanBarangActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 50, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,5000,50, locationListener);
     }
 }

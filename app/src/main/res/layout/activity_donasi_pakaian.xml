@@ -24,7 +24,8 @@
             android:orientation="vertical">
 
             <include android:id="@+id/item_donasi_1" layout="@layout/item_donasi_pakaian"/>
-            <include android:id="@+id/item_donasi_2" layout="@layout/item_donasi_pakaian" android:visibility="gone"/>
+            <include android:id="@+id/item_donasi_2" layout="@layout/item_donasi_pakaian"
+                android:visibility="gone"/>
 
 
             <Button

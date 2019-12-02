@@ -20,6 +20,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
 import com.example.delsa.activities.DetailBencanaActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -68,17 +73,32 @@ public class AdapterBencana extends RecyclerView.Adapter<AdapterBencana.ViewHold
         private final ImageView iv_fotobencana;
         private final TextView tv_judulbencana;
         private final TextView tv_deskripsi;
+        private final TextView tv_namaUser;
 
         ViewHolder(View itemView) {
             super(itemView);
             iv_fotobencana = itemView.findViewById(R.id.iv_fotobencana);
             tv_judulbencana = itemView.findViewById(R.id.tv_judulbencana);
             tv_deskripsi = itemView.findViewById(R.id.tv_deskripsibencana);
+            tv_namaUser = itemView.findViewById(R.id.tv_name_user);
         }
 
         void bind(Bencana bencana){
             tv_judulbencana.setText(bencana.getJudul());
             tv_deskripsi.setText(bencana.getDeskripsi());
+            DatabaseReference getNameUser = FirebaseDatabase.getInstance().getReference().child("Users").child(bencana.getIdUser());
+            getNameUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String namaUser = dataSnapshot.child("nama").getValue().toString();
+                    tv_namaUser.setText(namaUser);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));
             Glide.with(itemView.getContext())

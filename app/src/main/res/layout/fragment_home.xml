@@ -231,17 +231,17 @@
                         android:gravity="center_vertical"
                         android:text="Mencari...." />
 
-                    <Button
-                        android:id="@+id/btn_lihatsemuabencanaterdekat"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_weight="3"
-                        android:background="@android:color/transparent"
-                        android:text="Lihat Semua"
-                        android:textAlignment="textEnd"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/holo_blue_bright"
-                        android:textStyle="bold" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btn_lihatsemuabencanaterdekat"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_weight="3"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:text="Lihat Semua"-->
+<!--                        android:textAlignment="textEnd"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@android:color/holo_blue_bright"-->
+<!--                        android:textStyle="bold" />-->
                 </LinearLayout>
 
                 <com.facebook.shimmer.ShimmerFrameLayout

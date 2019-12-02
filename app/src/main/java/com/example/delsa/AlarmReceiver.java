@@ -153,7 +153,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     if (!dt.child("status").getValue().toString().equalsIgnoreCase("")) {
                         final User mUser = dt.getValue(User.class);
-                        if (!mUser.isStatus()) {
+                        if (!mUser.isStatus() && !mUser.getFotoIdentitas().equals("")) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String id = user.getUid();
 
@@ -162,7 +162,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     String kota = dataSnapshot.child("kota").getValue().toString();
-                                    if(kota.equalsIgnoreCase(mUser.getKota())){
+                                    String fotoIdentitas = dataSnapshot.child("fotoIdentitas").getValue().toString();
+                                    if(kota.equalsIgnoreCase(mUser.getKota()) && !fotoIdentitas.equals("")){
                                         newUser++;
                                     }
                                     notifikasiCallback.onSuccess(newUser);

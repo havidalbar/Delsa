@@ -1,9 +1,6 @@
 package com.example.delsa.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +16,6 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.delsa.POJO.Bencana;
 import com.example.delsa.R;
-import com.example.delsa.activities.DetailBencanaActivity;
 
 import java.util.ArrayList;
 
@@ -69,13 +65,15 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.ViewHold
 
         void bind(Bencana bencana){
             tv_judulriwayat.setText(bencana.getJudul());
-            String status;
-            if (bencana.isStatus()){
-                status = "Masih dikumpulkan";
-            } else {
-                status = "Sudah tersalurkan";
-                tv_statusriwayat.setTextColor(Color.parseColor("#ff00ddff"));
-            }
+            String status = bencana.getStatusPengiriman();
+//            Toast.makeText(context, status, Toast.LENGTH_SHORT).show();
+//            if (bencana.isStatus()){
+//                status = "Masih dikumpulkan";
+//            } else {
+//                status = "Sudah tersalurkan";
+//
+//            }
+//            tv_statusriwayat.setTextColor(Color.parseColor("#ff00ddff"));
             tv_statusriwayat.setText(status);
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(20));

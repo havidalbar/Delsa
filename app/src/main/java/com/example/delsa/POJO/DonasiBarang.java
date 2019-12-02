@@ -8,6 +8,9 @@ public class DonasiBarang implements Parcelable {
     private String idDonasi, idUser, idBencana, kategori, koordinat, alamat, ketalamat, jumlah, deskripsi, foto, tgldonasi;
     private boolean anonim;
 
+    public DonasiBarang() {
+    }
+
     public DonasiBarang(String idDonasi, String idUser, String idBencana, String kategori, String koordinat, String alamat, String ketalamat, String jumlah, String deskripsi, String foto, String tgldonasi, boolean anonim) {
         this.idDonasi = idDonasi;
         this.idUser = idUser;
